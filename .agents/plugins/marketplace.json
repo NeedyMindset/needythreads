@@ -1,0 +1,20 @@
+{
+  "name": "needythreads",
+  "interface": {
+    "displayName": "Threads (Meta) Skills"
+  },
+  "plugins": [
+    {
+      "name": "needythreads",
+      "source": {
+        "source": "local",
+        "path": "./.codex-marketplace/needythreads"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
