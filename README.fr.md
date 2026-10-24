@@ -29,7 +29,23 @@ Le bon skill s'active automatiquement. Tu relis et tu valides ensuite.
 
 ## Installation
 
-Choisis la méthode qui correspond à ton outil, Claude Code ou Codex :
+### Recommandé : Claude Code (testé sous Windows)
+
+Il te faut [Claude Code](https://claude.com/claude-code) installé. Dans une conversation Claude Code, colle ces deux lignes, une par une, et appuie sur Entrée après chacune :
+
+```
+/plugin marketplace add NeedyMindset/needythreads
+/plugin install needythreads@needythreads
+```
+
+Lance ensuite une nouvelle conversation et demande : « Écris un post Threads sur [sujet] ». Les skills ne se chargent que dans une nouvelle conversation.
+
+Tu obtiens des brouillons à copier-coller dans Threads, et rien d'autre n'est à installer. Pour que Claude publie à ta place, voir [Optionnel : publier automatiquement avec Publora](#optionnel--publier-automatiquement-avec-publora).
+
+<details>
+<summary><b>Autres méthodes d'installation (pas encore testées)</b></summary>
+
+> Ces méthodes sont documentées mais n'ont pas encore été testées de bout en bout. Si l'une échoue, utilise la méthode recommandée ci-dessus et [ouvre une issue](https://github.com/NeedyMindset/needythreads/issues).
 
 ### Codex CLI
 
@@ -137,6 +153,8 @@ Une seule commande qui fonctionne avec Claude Code, Codex, Cursor et tout autre 
 npx skills add NeedyMindset/needythreads
 ```
 
+</details>
+
 > **Ce projet t'est utile ? [Mets une étoile au dépôt](https://github.com/NeedyMindset/needythreads).** Les annuaires de Claude Code et de Codex classent et filtrent selon le nombre d'étoiles, donc une étoile est ce qui rend ces skills trouvables pour la personne suivante. C'est la seule chose demandée. Sans inscription, sans email.
 
 ## Ce que tu peux faire
@@ -194,6 +212,8 @@ Publora propose aussi des [skills MCP officiels](https://github.com/publora/skil
 
 ### Configuration (2 minutes)
 
+Les étapes 1, 2 et 4 se font dans ton compte Publora (inscription, connexion de Threads, création de la clé API). La **méthode automatique** ci-dessous remplace ensuite les étapes 3, 5 et 6 : la plupart des gens peuvent donc les sauter.
+
 **Étape 1.** Inscris-toi sur https://app.publora.com/signup (gratuit)
 
 **Étape 2.** Connecte Threads : clique sur **Channels** dans la barre latérale gauche, puis **Add Channel**, choisis **Threads** et autorise.
@@ -219,12 +239,19 @@ Ouvre ensuite `.env` et remplace les valeurs d'exemple par tes vraies valeurs.
 
 **Étape 6.** La publication et la génération d'images tournent sous Python : installe-le d'abord si tu ne l'as pas. Ouvre un terminal et tape `python --version` (sur Mac, `python3 --version`). Si un numéro de version s'affiche, passe à la suite. Sinon, télécharge Python sur https://www.python.org/downloads/ et lance l'installeur (sous Windows, coche **Add python.exe to PATH** sur le premier écran), puis ouvre un nouveau terminal. Écrire des posts marche sans Python ; seule la publication en a besoin.
 
-**Méthode automatique.** Si tu as cloné le dépôt (voir l'installation Claude Code plus haut), un script installe Python s'il manque, puis les deux paquets. Il te demande ensuite ta clé API Publora (saisie masquée), la vérifie, trouve tout seul ton Platform ID Threads et l'enregistre dans `~/.needythreads/.env` à ta place : tu peux donc sauter les étapes 3 et 5. Depuis le dossier `needythreads` :
+**Méthode automatique.** Récupère le dépôt une seule fois (il faut [Git](https://git-scm.com/downloads), ou utilise **Code > Download ZIP** sur GitHub puis décompresse l'archive) :
+
+```bash
+git clone https://github.com/NeedyMindset/needythreads.git
+cd needythreads
+```
+
+Ensuite, un script installe Python s'il manque, puis les deux paquets. Il te demande ensuite ta clé API Publora (saisie masquée), la vérifie, trouve tout seul ton Platform ID Threads et l'enregistre dans `~/.needythreads/.env` à ta place : tu peux donc sauter les étapes 3 et 5. Depuis le dossier `needythreads` :
 
 Windows (PowerShell) :
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File scriptssetup.ps1
+powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
 ```
 
 Mac ou Linux :

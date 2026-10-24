@@ -29,7 +29,23 @@ The right skill activates automatically. Then you review and approve.
 
 ## Install
 
-Pick whichever way you use Claude Code or Codex:
+### Recommended: Claude Code (tested on Windows)
+
+You need [Claude Code](https://claude.com/claude-code) installed. In a Claude Code conversation, paste these two lines, one at a time, and press Enter after each:
+
+```
+/plugin marketplace add NeedyMindset/needythreads
+/plugin install needythreads@needythreads
+```
+
+Then start a new conversation and ask: "Write a Threads post about [topic]". The skills only load in a new conversation.
+
+You get drafts to copy-paste into Threads, and nothing else needs to be installed. To let Claude publish for you, see [Optional: auto-post with Publora](#optional-auto-post-with-publora).
+
+<details>
+<summary><b>Other install methods (not tested yet)</b></summary>
+
+> These methods are documented but have not been tested end to end. If one fails, use the recommended method above and [open an issue](https://github.com/NeedyMindset/needythreads/issues).
 
 ### Codex CLI
 
@@ -137,6 +153,8 @@ One command that works across Claude Code, Codex, Cursor, and any other agent th
 npx skills add NeedyMindset/needythreads
 ```
 
+</details>
+
 > **Found this useful? [Star the repo](https://github.com/NeedyMindset/needythreads).** Curated Claude Code and Codex directories rank and gate by star count, so a star is what makes these skills findable for the next person. It is the only thing we ask. No signup, no email.
 
 ## What you can do
@@ -194,6 +212,8 @@ Publora also ships [official MCP skills](https://github.com/publora/skills) (`np
 
 ### Setup (2 minutes)
 
+Steps 1, 2 and 4 happen in your Publora account (sign up, connect Threads, create the API key). The **Automatic way** below then replaces Steps 3, 5 and 6, so most people can skip them.
+
 **Step 1.** Sign up at https://app.publora.com/signup (free)
 
 **Step 2.** Connect Threads: click **Channels** in the left sidebar, then **Add Channel**, pick **Threads**, authorize.
@@ -219,12 +239,19 @@ Then open `.env` and replace the placeholders with your real values.
 
 **Step 6.** Publishing and image generation run on Python, so install it first if you do not have it. Open a terminal and type `python --version` (on Mac, `python3 --version`). If you get a version number, skip ahead. If not, download Python from https://www.python.org/downloads/ and run the installer (on Windows, tick **Add python.exe to PATH** on the first screen), then open a new terminal. Writing posts works without Python; only publishing needs it.
 
-**Automatic way.** If you cloned the repo (see the Claude Code install above), one script installs Python if it is missing, then the two packages. It then asks for your Publora API key (typed hidden), checks it, finds your Threads Platform ID by itself and saves it in `~/.needythreads/.env` for you, so you can skip Steps 3 and 5. From inside the `needythreads` folder:
+**Automatic way.** Get the repo once (needs [Git](https://git-scm.com/downloads), or use **Code > Download ZIP** on GitHub and unzip it):
+
+```bash
+git clone https://github.com/NeedyMindset/needythreads.git
+cd needythreads
+```
+
+Then one script installs Python if it is missing, and the two packages. It then asks for your Publora API key (typed hidden), checks it, finds your Threads Platform ID by itself and saves it in `~/.needythreads/.env` for you, so you can skip Steps 3 and 5. From inside the `needythreads` folder:
 
 Windows (PowerShell):
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File scriptssetup.ps1
+powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
 ```
 
 Mac or Linux:
