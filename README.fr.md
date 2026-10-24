@@ -386,4 +386,6 @@ Ce dépôt est la couche supérieure open source de cet ensemble. L'automatisati
 
 MIT. Propulsé par [Publora](https://publora.com).
 
+NeedyThreads est basé sur [threads-skills](https://github.com/sergebulaev/threads-skills) de Sergey Bulaev, publié sous licence MIT. Sa notice de copyright est conservée dans [LICENSE](LICENSE) à côté de la nôtre.
+
 Voir aussi : le [dépôt Anthropic Skills](https://github.com/anthropics/skills) et l'annuaire `awesome-claude-skills`.

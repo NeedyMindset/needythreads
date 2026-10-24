@@ -385,4 +385,6 @@ This repo is the open-source top layer of that stack. The automation underneath 
 
 MIT. Powered by [Publora](https://publora.com).
 
+NeedyThreads is based on [threads-skills](https://github.com/sergebulaev/threads-skills) by Sergey Bulaev, released under the MIT license. His copyright notice is kept in [LICENSE](LICENSE) next to ours.
+
 Also: [Anthropic Skills repo](https://github.com/anthropics/skills), the `awesome-claude-skills` directory.
