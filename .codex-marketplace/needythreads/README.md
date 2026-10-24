@@ -2,6 +2,8 @@
   <img src="assets/hero.png" alt="Threads marketing skills for Claude Code and Codex, open source MIT licensed" width="900" />
 </p>
 
+**English** | [Français](README.fr.md)
+
 # Threads Marketing Skills for Claude Code and Codex
 
 <p align="center">
