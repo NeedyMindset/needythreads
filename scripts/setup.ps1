@@ -50,8 +50,12 @@ $template = Join-Path $root '.env.example'
 $envFile = Join-Path $root '.env'
 if ((Test-Path $template) -and -not (Test-Path $envFile)) {
     Copy-Item $template $envFile
-    Write-Host "Created $envFile. Open it and replace the placeholder values with your own keys."
+    Write-Host "Created $envFile."
 }
+
+Write-Host ""
+Write-Host "Connecting Publora (press Enter to skip, posts then stay in draft mode)..."
+python (Join-Path $PSScriptRoot 'configure_env.py')
 
 Write-Host ""
 Write-Host "Done. Python and the packages are ready."

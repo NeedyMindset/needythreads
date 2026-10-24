@@ -219,7 +219,7 @@ Then open `.env` and replace the placeholders with your real values.
 
 **Step 6.** Publishing and image generation run on Python, so install it first if you do not have it. Open a terminal and type `python --version` (on Mac, `python3 --version`). If you get a version number, skip ahead. If not, download Python from https://www.python.org/downloads/ and run the installer (on Windows, tick **Add python.exe to PATH** on the first screen), then open a new terminal. Writing posts works without Python; only publishing needs it.
 
-**Automatic way.** If you cloned the repo (see the Claude Code install above), one script installs Python if it is missing, then the two packages, and creates your `.env` if you have none yet. From inside the `needythreads` folder:
+**Automatic way.** If you cloned the repo (see the Claude Code install above), one script installs Python if it is missing, then the two packages. It then asks for your Publora API key (typed hidden), checks it, finds your Threads Platform ID by itself and fills in `.env` for you, so you can skip Steps 3 and 5. From inside the `needythreads` folder:
 
 Windows (PowerShell):
 
@@ -232,6 +232,8 @@ Mac or Linux:
 ```bash
 sh scripts/setup.sh
 ```
+
+To redo only the key part later: `python scripts/configure_env.py`.
 
 **By hand.** On Windows you can also install Python with one command: `winget install Python.Python.3.12`. Then close and reopen the terminal and install two small Python packages:
 
@@ -294,6 +296,7 @@ Every skill follows these rules automatically:
 | "PUBLORA_API_KEY not set" | Your `.env` file is missing or in the wrong folder. It should be in the `needythreads/` root. |
 | "401 Invalid API key" from Publora | Your API key is wrong or revoked. Go to Publora Settings > API > Create a new key. |
 | "Invalid platform ID format" | Your `THREADS_PLATFORM_ID` is wrong. Go to Publora Channels and copy the full `threads-...` string. |
+| I cannot find my Platform ID | Create your API key first (Step 4) and put it in `.env`. Then, from the repo folder, run `python -c "from lib import PubloraClient; print([c['platformId'] for c in PubloraClient().threads_connections()])"`. It prints your `threads-...` ID. |
 | My second hashtag disappeared | Threads allows only one hashtag per post. The platform drops extras. Use one, at the end. |
 | My thread didn't post as connected posts | Multi-post nesting can be temporarily paused while Meta works through Threads app reconnection. Post the opener, then add the rest as replies by hand. |
 | My reply didn't auto-post | A reply to another user is a separate post Publora cannot target. The Reply Drafter returns a copy-paste block. Post it yourself. |

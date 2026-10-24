@@ -38,8 +38,15 @@ fi
 
 if [ -f "$root/.env.example" ] && [ ! -f "$root/.env" ]; then
     cp "$root/.env.example" "$root/.env"
-    echo "Created $root/.env. Open it and replace the placeholder values with your own keys."
+    echo "Created $root/.env."
 fi
+
+py=python3
+[ -x "$root/.venv/bin/python" ] && py="$root/.venv/bin/python"
+
+echo ""
+echo "Connecting Publora (press Enter to skip, posts then stay in draft mode)..."
+"$py" "$root/scripts/configure_env.py" || true
 
 echo ""
 echo "Done. Python and the packages are ready."
