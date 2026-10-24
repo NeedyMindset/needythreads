@@ -6,7 +6,8 @@ and never printed. The Platform ID is read from your connected Threads account,
 so there is nothing to copy by hand. Safe to run again: values that are already
 set are kept.
 
-Run from the repo root (setup.ps1 and setup.sh call it for you):
+The file is saved in your home folder (~/.needythreads/.env), so the skills
+find it from any conversation. setup.ps1 and setup.sh call this for you:
 
     python3 scripts/configure_env.py
 """
@@ -21,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-ENV_FILE = ROOT / ".env"
+ENV_FILE = Path.home() / ".needythreads" / ".env"
 TEMPLATE = ROOT / ".env.example"
 KEY_PLACEHOLDER = "sk_your_key_here"
 ID_PLACEHOLDER = "threads-your_id_here"
@@ -80,9 +81,14 @@ def main() -> int:
 
     if not ENV_FILE.exists():
         if not TEMPLATE.exists():
-            print("No .env.example found. Run this from the needythreads folder.")
+            print("No .env.example found next to the scripts folder.")
             return 1
+        ENV_FILE.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(TEMPLATE, ENV_FILE)
+        try:
+            ENV_FILE.chmod(0o600)
+        except OSError:
+            pass
 
     with open(ENV_FILE, encoding="utf-8", newline="") as handle:
         lines = handle.readlines()
@@ -93,7 +99,7 @@ def main() -> int:
     id_set = bool(platform_id) and platform_id != ID_PLACEHOLDER
 
     if key_set and id_set:
-        print(".env already has a Publora key and a Threads Platform ID. Nothing to do.")
+        print(f"{ENV_FILE} already has a Publora key and a Threads Platform ID. Nothing to do.")
         return 0
 
     if not key_set:

@@ -1,5 +1,6 @@
 # NeedyThreads setup for Windows: installs Python if missing, then the two
-# packages the publishing layer needs. Safe to run again.
+# packages the publishing layer needs, then saves your Publora keys in
+# ~/.needythreads/.env. Safe to run again.
 # Writing posts does not need any of this; only publishing and images do.
 #
 # Run from PowerShell:  .\scripts\setup.ps1
@@ -44,13 +45,6 @@ if (Test-Path $requirements) {
 if ($LASTEXITCODE -ne 0) {
     Write-Host "pip failed. See the Troubleshooting table in the README."
     exit 1
-}
-
-$template = Join-Path $root '.env.example'
-$envFile = Join-Path $root '.env'
-if ((Test-Path $template) -and -not (Test-Path $envFile)) {
-    Copy-Item $template $envFile
-    Write-Host "Created $envFile."
 }
 
 Write-Host ""

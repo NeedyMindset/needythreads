@@ -202,7 +202,7 @@ Publora also ships [official MCP skills](https://github.com/publora/skills) (`np
 
 **Step 4.** Get your API key: click **Settings** (gear icon, bottom-left), then **API**, then **Create Key**. Copy the `sk_...` string.
 
-**Step 5.** Create a file called `.env` in the needythreads folder:
+**Step 5.** Create a file called `.env`. The simplest place is a folder called `.needythreads` in your home folder (`C:\Users\YourName\.needythreads\.env` on Windows, `~/.needythreads/.env` on Mac and Linux): the skills find it from any conversation. A `.env` in the folder where you work, or in the needythreads folder, works too.
 
 ```
 PUBLORA_API_KEY=sk_paste_your_key_here
@@ -219,7 +219,7 @@ Then open `.env` and replace the placeholders with your real values.
 
 **Step 6.** Publishing and image generation run on Python, so install it first if you do not have it. Open a terminal and type `python --version` (on Mac, `python3 --version`). If you get a version number, skip ahead. If not, download Python from https://www.python.org/downloads/ and run the installer (on Windows, tick **Add python.exe to PATH** on the first screen), then open a new terminal. Writing posts works without Python; only publishing needs it.
 
-**Automatic way.** If you cloned the repo (see the Claude Code install above), one script installs Python if it is missing, then the two packages. It then asks for your Publora API key (typed hidden), checks it, finds your Threads Platform ID by itself and fills in `.env` for you, so you can skip Steps 3 and 5. From inside the `needythreads` folder:
+**Automatic way.** If you cloned the repo (see the Claude Code install above), one script installs Python if it is missing, then the two packages. It then asks for your Publora API key (typed hidden), checks it, finds your Threads Platform ID by itself and saves it in `~/.needythreads/.env` for you, so you can skip Steps 3 and 5. From inside the `needythreads` folder:
 
 Windows (PowerShell):
 
@@ -293,7 +293,7 @@ Every skill follows these rules automatically:
 | Problem | Fix |
 |---|---|
 | Skills don't activate when I ask about Threads | Make sure you installed via Plugins in claude.ai or Claude Desktop (Discover > Add), `/plugin install`, or `codex plugin add`. Try a new conversation. |
-| "PUBLORA_API_KEY not set" | Your `.env` file is missing or in the wrong folder. It should be in the `needythreads/` root. |
+| "PUBLORA_API_KEY not set" | Your `.env` file is missing or in the wrong folder. Put it in `~/.needythreads/.env` (your home folder), or run `python scripts/configure_env.py`. |
 | "401 Invalid API key" from Publora | Your API key is wrong or revoked. Go to Publora Settings > API > Create a new key. |
 | "Invalid platform ID format" | Your `THREADS_PLATFORM_ID` is wrong. Go to Publora Channels and copy the full `threads-...` string. |
 | I cannot find my Platform ID | Create your API key first (Step 4) and put it in `.env`. Then, from the repo folder, run `python -c "from lib import PubloraClient; print([c['platformId'] for c in PubloraClient().threads_connections()])"`. It prints your `threads-...` ID. |

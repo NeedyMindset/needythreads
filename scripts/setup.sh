@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 # NeedyThreads setup for Mac and Linux: installs Python if missing, then the
-# two packages the publishing layer needs. Safe to run again.
+# two packages the publishing layer needs, then saves your Publora keys in
+# ~/.needythreads/.env. Safe to run again.
 # Writing posts does not need any of this; only publishing and images do.
 #
 # Run from a terminal:  sh scripts/setup.sh
@@ -34,11 +35,6 @@ if ! python3 -m pip install --quiet --user "$@" 2>/dev/null; then
     python3 -m venv "$root/.venv"
     "$root/.venv/bin/python" -m pip install --quiet "$@"
     echo "Run the scripts with: $root/.venv/bin/python"
-fi
-
-if [ -f "$root/.env.example" ] && [ ! -f "$root/.env" ]; then
-    cp "$root/.env.example" "$root/.env"
-    echo "Created $root/.env."
 fi
 
 py=python3

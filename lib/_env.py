@@ -14,9 +14,15 @@ _DOTENV_VARIABLES = (
 )
 
 
+def user_env_path() -> Path:
+    """The per-user credentials file, found from any working directory."""
+    return Path.home() / ".needythreads" / ".env"
+
+
 def env_candidates() -> list[Path]:
     """Where `load_env` looks, in order: upward from the cwd, then the repo root
-    (this file's parent's parent)."""
+    (this file's parent's parent), then the per-user file in the home folder.
+    The first file to define a name wins."""
     out: list[Path] = []
     try:
         from dotenv import find_dotenv
@@ -33,6 +39,9 @@ def env_candidates() -> list[Path]:
     root = Path(__file__).resolve().parents[1] / ".env"
     if root not in out:
         out.append(root)
+    home = user_env_path()
+    if home not in out:
+        out.append(home)
     return out
 
 
@@ -41,7 +50,7 @@ def load_env(force: bool = False) -> None:
 
     Safe no-op if python-dotenv is missing, preserving Tier 0 (manual)
     zero-dependency operation. Searches upwards from the current working
-    directory and checks the repository root. Only bundle API credentials and
+    directory, then the repository root, then ~/.needythreads/.env. Only bundle API credentials and
     the platform id are loaded. Executables and transport settings must come
     from the launch environment. Existing environment variables are preserved.
     """
