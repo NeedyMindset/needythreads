@@ -29,18 +29,19 @@ Le bon skill s'active automatiquement. Tu relis et tu valides ensuite.
 
 ## Installation
 
-### Recommandé : Claude Code (testé sous Windows)
+### Recommandé : claude.ai (sans ligne de commande, testé)
 
-Il te faut [Claude Code](https://claude.com/claude-code) installé. Dans une conversation Claude Code, colle ces deux lignes, une par une, et appuie sur Entrée après chacune :
+1. Ouvre https://claude.ai et clique sur **Personnalisation** dans la barre latérale gauche, puis sur l'onglet **Plugins**
+2. Clique sur **+ Ajouter**, puis **Ajouter une place de marché**, puis **Ajouter depuis un dépôt**
+3. Sélectionne ou saisis `NeedyMindset/needythreads` et clique sur **Synchro**
+4. **Needythreads** apparaît dans la liste. Clique sur **Ajouter**. Un message confirme qu'il est installé et prêt à être utilisé
+5. Lance une nouvelle conversation et demande : « Écris un post Threads sur [sujet] ». Les skills ne se chargent que dans une nouvelle conversation.
 
-```
-/plugin marketplace add NeedyMindset/needythreads
-/plugin install needythreads@needythreads
-```
+Un bandeau peut te demander d'accorder à la Claude GitHub App l'accès au dépôt. Tu peux l'ignorer : le plugin fonctionne sans, et cela ne sert qu'aux mises à jour automatiques.
 
-Lance ensuite une nouvelle conversation et demande : « Écris un post Threads sur [sujet] ». Les skills ne se chargent que dans une nouvelle conversation.
+Dernière vérification sur claude.ai le 25 octobre 2026 avec la version v1.0.40.
 
-Tu obtiens des brouillons à copier-coller dans Threads, et rien d'autre n'est à installer. Pour que Claude publie à ta place, voir [Optionnel : publier automatiquement avec Publora](#optionnel--publier-automatiquement-avec-publora).
+Dans claude.ai, tu obtiens des brouillons à copier-coller dans Threads. Pour que Claude publie à ta place, utilise Claude Code ou Codex sur ton ordinateur (voir [Optionnel : publier automatiquement avec Publora](#optionnel--publier-automatiquement-avec-publora)).
 
 <details>
 <summary><b>Autres méthodes d'installation (pas encore testées)</b></summary>
@@ -62,14 +63,6 @@ cd needythreads
 codex plugin marketplace add .
 codex plugin add needythreads@needythreads
 ```
-
-### claude.ai (web)
-
-1. Ouvre https://claude.ai et va dans **Plugins**
-2. Clique sur **+ Ajouter**, puis **Ajouter une place de marché**, puis **Ajouter depuis un dépôt**
-3. Colle `https://github.com/NeedyMindset/needythreads.git` et valide
-4. Ouvre l'onglet **Découvrir**, trouve **Needythreads** et clique sur **Ajouter**
-5. Lance une nouvelle conversation. Les skills s'activent automatiquement quand tu parles de Threads.
 
 ### Claude Desktop (Mac / Windows), sans ligne de commande
 
@@ -99,7 +92,7 @@ claude plugin install needythreads@needythreads
 
 Lance ensuite Claude Code en tapant `claude`, puis demande un post Threads.
 
-Tu es déjà dans une conversation Claude Code ? Utilise la version avec slash, sans terminal :
+Tu es déjà dans une conversation Claude Code dans un terminal ou un IDE ? Utilise la version avec slash (dans l'application Claude Desktop, `/plugin` ouvre seulement la fenêtre Plugins : utilise les commandes du terminal ci-dessus ou les étapes claude.ai) :
 
 ```
 /plugin marketplace add NeedyMindset/needythreads
@@ -320,7 +313,9 @@ Chaque skill suit automatiquement ces règles :
 
 | Problème | Solution |
 |---|---|
-| Les skills ne s'activent pas quand je parle de Threads | Vérifie que tu as installé via Plugins dans claude.ai ou Claude Desktop (Découvrir > Ajouter), `/plugin install` ou `codex plugin add`. Essaie une nouvelle conversation. |
+| Les skills ne s'activent pas quand je parle de Threads | Vérifie qu'il apparaît comme ajouté dans Personnalisation > Plugins sur claude.ai (ou qu'il a été installé avec `claude plugin install` ou `codex plugin add`). Essaie une nouvelle conversation. |
+| « Failed to add marketplace ... its network source differs » | Une marketplace nommée `needythreads` est déjà enregistrée avec une autre source (un dossier local, par exemple). Supprime-la puis ajoute-la à nouveau : `claude plugin marketplace remove needythreads`, puis `claude plugin marketplace add NeedyMindset/needythreads`. |
+| Taper `/plugin ...` ouvre une fenêtre et rien ne s'installe | C'est le comportement de l'application Claude Desktop pour `/plugin`. Utilise les étapes claude.ai (Personnalisation > Plugins) ou lance `claude plugin ...` dans un terminal. |
 | "PUBLORA_API_KEY not set" | Ton fichier `.env` est absent ou au mauvais endroit. Mets-le dans `~/.needythreads/.env` (ton dossier personnel) ou lance `python scripts/configure_env.py`. |
 | "401 Invalid API key" de Publora | Ta clé API est incorrecte ou révoquée. Va dans Publora, Settings, API, et crée une nouvelle clé. |
 | "Invalid platform ID format" | Ton `THREADS_PLATFORM_ID` est incorrect. Va dans Channels sur Publora et copie la chaîne `threads-...` complète. |

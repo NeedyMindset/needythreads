@@ -29,18 +29,19 @@ The right skill activates automatically. Then you review and approve.
 
 ## Install
 
-### Recommended: Claude Code (tested on Windows)
+### Recommended: claude.ai (no command line, tested)
 
-You need [Claude Code](https://claude.com/claude-code) installed. In a Claude Code conversation, paste these two lines, one at a time, and press Enter after each:
+1. Open https://claude.ai and click **Customize** in the left sidebar, then the **Plugins** tab
+2. Click **+ Add**, then **Add a marketplace**, then **Add from a repository**
+3. Select or type `NeedyMindset/needythreads` and click **Sync**
+4. **Needythreads** shows up in the list. Click **Add**. A message confirms it is installed and ready to use
+5. Start a new conversation and ask: "Write a Threads post about [topic]". The skills only load in a new conversation.
 
-```
-/plugin marketplace add NeedyMindset/needythreads
-/plugin install needythreads@needythreads
-```
+A banner may ask you to give the Claude GitHub App access to the repository. You can ignore it: the plugin works without it, and it only matters for automatic updates.
 
-Then start a new conversation and ask: "Write a Threads post about [topic]". The skills only load in a new conversation.
+Last checked on claude.ai on 25 October 2026 with release v1.0.40.
 
-You get drafts to copy-paste into Threads, and nothing else needs to be installed. To let Claude publish for you, see [Optional: auto-post with Publora](#optional-auto-post-with-publora).
+In claude.ai you get drafts to copy-paste into Threads. To let Claude publish for you, use Claude Code or Codex on your computer (see [Optional: auto-post with Publora](#optional-auto-post-with-publora)).
 
 <details>
 <summary><b>Other install methods (not tested yet)</b></summary>
@@ -62,14 +63,6 @@ cd needythreads
 codex plugin marketplace add .
 codex plugin add needythreads@needythreads
 ```
-
-### claude.ai (web)
-
-1. Open https://claude.ai and go to **Plugins**
-2. Click **+ Add**, then **Add a marketplace**, then **Add from a repository**
-3. Paste `https://github.com/NeedyMindset/needythreads.git` and confirm
-4. Open the **Discover** tab, find **Needythreads**, and click **Add**
-5. Start a new conversation. The skills activate automatically when you ask about Threads.
 
 ### Claude Desktop (Mac / Windows), no command line needed
 
@@ -99,7 +92,7 @@ claude plugin install needythreads@needythreads
 
 Then start Claude Code by typing `claude`, and ask for a Threads post.
 
-Already inside a Claude Code conversation? Use the slash version instead, no terminal needed:
+Already inside a Claude Code conversation in a terminal or IDE? Use the slash version instead (in the Claude Desktop app, `/plugin` only opens the Plugins window; use the terminal commands above or the claude.ai steps there):
 
 ```
 /plugin marketplace add NeedyMindset/needythreads
@@ -319,7 +312,9 @@ Every skill follows these rules automatically:
 
 | Problem | Fix |
 |---|---|
-| Skills don't activate when I ask about Threads | Make sure you installed via Plugins in claude.ai or Claude Desktop (Discover > Add), `/plugin install`, or `codex plugin add`. Try a new conversation. |
+| Skills don't activate when I ask about Threads | Make sure it shows as added under Customize > Plugins in claude.ai (or was installed with `claude plugin install` or `codex plugin add`). Try a new conversation. |
+| "Failed to add marketplace ... its network source differs" | A marketplace named `needythreads` is already registered with a different source (a local folder, for example). Remove it, then add it again: `claude plugin marketplace remove needythreads`, then `claude plugin marketplace add NeedyMindset/needythreads`. |
+| Typing `/plugin ...` opens a window and nothing installs | That is how the Claude Desktop app handles `/plugin`. Use the claude.ai steps (Customize > Plugins) or run `claude plugin ...` in a terminal. |
 | "PUBLORA_API_KEY not set" | Your `.env` file is missing or in the wrong folder. Put it in `~/.needythreads/.env` (your home folder), or run `python scripts/configure_env.py`. |
 | "401 Invalid API key" from Publora | Your API key is wrong or revoked. Go to Publora Settings > API > Create a new key. |
 | "Invalid platform ID format" | Your `THREADS_PLATFORM_ID` is wrong. Go to Publora Channels and copy the full `threads-...` string. |
