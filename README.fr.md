@@ -219,7 +219,21 @@ Ouvre ensuite `.env` et remplace les valeurs d'exemple par tes vraies valeurs.
 
 **Étape 6.** La publication et la génération d'images tournent sous Python : installe-le d'abord si tu ne l'as pas. Ouvre un terminal et tape `python --version` (sur Mac, `python3 --version`). Si un numéro de version s'affiche, passe à la suite. Sinon, télécharge Python sur https://www.python.org/downloads/ et lance l'installeur (sous Windows, coche **Add python.exe to PATH** sur le premier écran), puis ouvre un nouveau terminal. Écrire des posts marche sans Python ; seule la publication en a besoin.
 
-Installe ensuite deux petits paquets Python :
+**Méthode automatique.** Si tu as cloné le dépôt (voir l'installation Claude Code plus haut), un script installe Python s'il manque, puis les deux paquets, et crée ton `.env` si tu n'en as pas encore. Depuis le dossier `needythreads` :
+
+Windows (PowerShell) :
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scriptssetup.ps1
+```
+
+Mac ou Linux :
+
+```bash
+sh scripts/setup.sh
+```
+
+**À la main.** Sous Windows, tu peux aussi installer Python avec une seule commande : `winget install Python.Python.3.12`. Ferme et rouvre ensuite le terminal, puis installe deux petits paquets Python :
 
 ```bash
 pip install requests python-dotenv

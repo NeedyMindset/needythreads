@@ -49,29 +49,55 @@ codex plugin add needythreads@needythreads
 
 ### claude.ai (web)
 
-1. Open https://claude.ai/code
-2. Go to **Skills** in the sidebar
-3. Click **Add from GitHub**
-4. Paste: `NeedyMindset/needythreads`
-5. Done. The skills activate automatically when you ask about Threads.
+1. Open https://claude.ai and go to **Plugins**
+2. Click **+ Add**, then **Add a marketplace**, then **Add from a repository**
+3. Paste `https://github.com/NeedyMindset/needythreads.git` and confirm
+4. Open the **Discover** tab, find **Needythreads**, and click **Add**
+5. Start a new conversation. The skills activate automatically when you ask about Threads.
 
-### Claude Desktop (Mac / Windows)
+### Claude Desktop (Mac / Windows), no command line needed
 
-1. Open Claude Desktop
-2. Open **Settings** (gear icon)
-3. Go to **Skills**
-4. Click **Add from GitHub**
-5. Paste: `NeedyMindset/needythreads`
-6. Done. Start a new conversation and ask Claude to write a Threads post.
+1. Open Claude Desktop and go to **Plugins**
+2. Click **+ Add** (top right), then **Add a marketplace**
+3. Choose **Add from a repository**
+4. Paste `https://github.com/NeedyMindset/needythreads.git` (the short form `NeedyMindset/needythreads` works too) and confirm
+5. Open the **Discover** tab, find **Needythreads**, and click **Add**. The button changes to "Added".
+6. Start a new conversation and ask Claude to write a Threads post. The skills only load in a new conversation.
 
-### Claude Code (CLI / VS Code / JetBrains)
+If it does not show up, check **Your plugins**. To remove it later, use **Manage marketplaces**: removing a marketplace also removes its plugins.
+
+### Claude Code (terminal, VS Code, JetBrains)
+
+You need [Claude Code](https://claude.com/claude-code) installed. Then open a terminal, which is a window where you type commands:
+
+- **Windows:** press the Windows key, type `PowerShell`, press Enter.
+- **Mac:** press Cmd + Space, type `Terminal`, press Enter.
+- **VS Code:** menu **Terminal** > **New Terminal**.
+
+Paste these two commands, one at a time, and press Enter after each:
+
+```bash
+claude plugin marketplace add NeedyMindset/needythreads
+claude plugin install needythreads@needythreads
+```
+
+Then start Claude Code by typing `claude`, and ask for a Threads post.
+
+Already inside a Claude Code conversation? Use the slash version instead, no terminal needed:
 
 ```
 /plugin marketplace add NeedyMindset/needythreads
 /plugin install needythreads@needythreads
 ```
 
-Or clone the repo and open it as your working directory:
+To remove it:
+
+```bash
+claude plugin uninstall needythreads@needythreads
+claude plugin marketplace remove needythreads
+```
+
+Or clone the repo and open it as your working directory (needs [Git](https://git-scm.com/downloads) installed):
 
 ```bash
 git clone https://github.com/NeedyMindset/needythreads.git
@@ -191,7 +217,23 @@ cp .env.example .env
 
 Then open `.env` and replace the placeholders with your real values.
 
-**Step 6.** Install two small Python packages:
+**Step 6.** Publishing and image generation run on Python, so install it first if you do not have it. Open a terminal and type `python --version` (on Mac, `python3 --version`). If you get a version number, skip ahead. If not, download Python from https://www.python.org/downloads/ and run the installer (on Windows, tick **Add python.exe to PATH** on the first screen), then open a new terminal. Writing posts works without Python; only publishing needs it.
+
+**Automatic way.** If you cloned the repo (see the Claude Code install above), one script installs Python if it is missing, then the two packages, and creates your `.env` if you have none yet. From inside the `needythreads` folder:
+
+Windows (PowerShell):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scriptssetup.ps1
+```
+
+Mac or Linux:
+
+```bash
+sh scripts/setup.sh
+```
+
+**By hand.** On Windows you can also install Python with one command: `winget install Python.Python.3.12`. Then close and reopen the terminal and install two small Python packages:
 
 ```bash
 pip install requests python-dotenv
@@ -248,7 +290,7 @@ Every skill follows these rules automatically:
 
 | Problem | Fix |
 |---|---|
-| Skills don't activate when I ask about Threads | Make sure you installed via the Skills panel, `/plugin install`, or `codex plugin add`. Try a new conversation. |
+| Skills don't activate when I ask about Threads | Make sure you installed via Plugins in claude.ai or Claude Desktop (Discover > Add), `/plugin install`, or `codex plugin add`. Try a new conversation. |
 | "PUBLORA_API_KEY not set" | Your `.env` file is missing or in the wrong folder. It should be in the `needythreads/` root. |
 | "401 Invalid API key" from Publora | Your API key is wrong or revoked. Go to Publora Settings > API > Create a new key. |
 | "Invalid platform ID format" | Your `THREADS_PLATFORM_ID` is wrong. Go to Publora Channels and copy the full `threads-...` string. |

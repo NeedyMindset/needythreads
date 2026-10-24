@@ -219,7 +219,21 @@ Then open `.env` and replace the placeholders with your real values.
 
 **Step 6.** Publishing and image generation run on Python, so install it first if you do not have it. Open a terminal and type `python --version` (on Mac, `python3 --version`). If you get a version number, skip ahead. If not, download Python from https://www.python.org/downloads/ and run the installer (on Windows, tick **Add python.exe to PATH** on the first screen), then open a new terminal. Writing posts works without Python; only publishing needs it.
 
-Then install two small Python packages:
+**Automatic way.** If you cloned the repo (see the Claude Code install above), one script installs Python if it is missing, then the two packages, and creates your `.env` if you have none yet. From inside the `needythreads` folder:
+
+Windows (PowerShell):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scriptssetup.ps1
+```
+
+Mac or Linux:
+
+```bash
+sh scripts/setup.sh
+```
+
+**By hand.** On Windows you can also install Python with one command: `winget install Python.Python.3.12`. Then close and reopen the terminal and install two small Python packages:
 
 ```bash
 pip install requests python-dotenv
