@@ -1,6 +1,6 @@
 ---
 name: threads-hook-extractor
-description: "Décortique l'accroche d'un post ou thread Threads viral à partir de son URL : identifie laquelle des 10 formules Threads 2026 il utilise, explique pourquoi elle marche, puis donne un modèle vierge adapté à ton sujet avec son objectif principal (réponses, republications, likes, citations). Mots-clés : analyser une accroche, hook teardown. Pas pour écrire ton propre post (utiliser threads-post-writer)."
+description: "Décortique l'accroche d'un post ou thread Threads viral à partir de son URL : identifie laquelle des 13 formules Threads 2026 il utilise, explique pourquoi elle marche, puis donne un modèle vierge adapté à ton sujet avec son objectif principal (réponses, republications, likes, citations). Mots-clés : analyser une accroche, hook teardown. Pas pour écrire ton propre post (utiliser threads-post-writer)."
 ---
 
 # Threads Hook Extractor

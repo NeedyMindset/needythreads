@@ -1,6 +1,6 @@
 # Sub-skill: Build / update the Voice & Brand Profile
 
-Builds or refreshes `../../../references/voice-profile.md` so every writing skill in
+Builds or refreshes the user's profile at `~/.needythreads/voice-profile.md` (their home folder, outside the plugin, so updates never erase it; the blank template is `../../../references/voice-profile.md`) so every writing skill in
 this bundle drafts in the user's real voice instead of a generic "human" voice.
 Runs on any agent (Claude Code, Codex, OpenClaw): the core path needs only the
 user's own writing pasted in. A read token (Apify) is an optional accelerator,
@@ -28,10 +28,11 @@ never required.
    avoid, emoji/hashtag behavior.
 3. Infer niche, ICP, and pillars from the sample topics; confirm rather than guess.
 4. Capture hard rules and CTA/link style the samples reveal or the user states.
-5. Write `../../../references/voice-profile.md`: fill sections 1-5, copy the 2-4
+5. Write `~/.needythreads/voice-profile.md` (create the folder if needed, start from the template structure): fill sections 1-5, copy the 2-4
    strongest lines verbatim into "Signature examples", and set the Status block to
    `filled: yes`, `source: <pasted|read-layer|manual>`, `updated: <today>`.
-6. Show the filled profile for approval before saving; tell the user every writing
+6. If you cannot write files (claude.ai chat), give the profile as one copy-paste block and tell the user to paste it into the instructions of their Claude project.
+7. Show the filled profile for approval before saving; tell the user every writing
    skill will now match it automatically.
 
 ## Hard rules

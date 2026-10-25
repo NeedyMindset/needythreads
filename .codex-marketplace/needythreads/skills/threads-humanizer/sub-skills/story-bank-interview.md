@@ -6,11 +6,11 @@ input has none, the rule is to ask rather than invent. That ask currently happen
 on every request, unstructured, and the answers die with the session.
 
 This mode does the asking properly, once, and keeps the answers in
-`../../../references/story-bank.md`.
+`~/.needythreads/story-bank.md`.
 
 ## The two halves of the user model
 
-| | `references/voice-profile.md` | `references/story-bank.md` |
+| | `~/.needythreads/voice-profile.md` | `~/.needythreads/story-bank.md` |
 |---|---|---|
 | Holds | how you sound | what you have to say |
 | Built from | 3-6 posts you already wrote | an interview |
@@ -32,7 +32,7 @@ both.
 
 ### Bank (default)
 
-A broad interview filling `../../../references/story-bank.md`. Budget 20 to 40
+A broad interview filling `~/.needythreads/story-bank.md`. Budget 20 to 40
 minutes. Resumable: the file records which sections are thin, so a second session
 picks up there.
 
@@ -104,8 +104,8 @@ interview quietly grows it.
 - **Press once, not twice.** The goal is material, not a confession.
 - **Stop when they flag a limit.** "I would rather not say" ends that line
   permanently; record it under Off limits so nothing asks again.
-- **Say where the file lives.** Tell the user once that the bank is a file in this
-  repository and should be gitignored before they fill it.
+- **Say where the file lives.** Tell the user once that the bank is saved in
+  `~/.needythreads/`, outside the plugin: updates never erase it and it is never committed. If you cannot write files (claude.ai chat), give the bank as one copy-paste block to paste into the instructions of their Claude project.
 - **Do not turn it into a form.** If the user is talking, follow them; the section
   list is a checklist for the end, not a script for the middle.
 

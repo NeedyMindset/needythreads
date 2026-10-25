@@ -39,7 +39,7 @@ Le bon skill s'active automatiquement. Tu relis et tu valides ensuite.
 
 Un bandeau peut te demander d'accorder à la Claude GitHub App l'accès au dépôt. Tu peux l'ignorer : le plugin fonctionne sans, et cela ne sert qu'aux mises à jour automatiques.
 
-Dernière vérification sur claude.ai le 25 octobre 2026 avec la version v1.0.40.
+Parcours d'installation testé sur claude.ai le 25 octobre 2026 (dernière version testée : v1.0.42).
 
 Dans claude.ai, tu obtiens des brouillons à copier-coller dans Threads. Pour que Claude publie à ta place, utilise Claude Code ou Codex sur ton ordinateur (voir [Optionnel : publier automatiquement avec Publora](#optionnel--publier-automatiquement-avec-publora)).
 
@@ -192,6 +192,10 @@ Chaque skill te montre d'abord un brouillon et attend ton accord. Rien n'est pub
 Threads plafonne un post à **500 caractères** (10 000 si tu joins le texte long). Pour tout contenu plus long, tu construis un thread de plusieurs posts. Avec l'API native de Threads, cela signifie créer un conteneur pour le post 1, le publier, puis créer chaque post suivant avec un `reply_to_id` qui pointe vers le précédent, et gérer les échecs partiels.
 
 Ce bundle confie toute la chaîne à [Publora](https://publora.com). Tu écris le thread en un seul bloc (ou tu le découpes avec `---`), et Publora le découpe automatiquement en thread connecté aux frontières de paragraphe puis de phrase, et le publie en un seul appel. Contrairement à X, Threads n'ajoute pas de marqueurs `(1/N)` par défaut. Le skill Post Writer utilise cela après ta validation.
+
+## Ton profil (une seule fois)
+
+La première fois, `threads-post-writer` te pose 5 questions (2 minutes). Il te propose ensuite de garder ton profil : sur ton ordinateur (Claude Code, Codex), il l'enregistre dans `~/.needythreads/`, en dehors du plugin, donc une mise à jour ne l'efface pas. Dans claude.ai, il te donne un bloc à coller dans les instructions de ton projet Claude. Pour un profil plus complet, écris `threads-humanizer --mode profile` (il apprend ta voix à partir de 3 à 6 de tes posts) ou `threads-humanizer --mode interview` (20 à 40 minutes de questions). Ce sont des mots-clés à écrire dans Claude, pas des commandes de terminal.
 
 ## Optionnel : publier automatiquement avec Publora
 

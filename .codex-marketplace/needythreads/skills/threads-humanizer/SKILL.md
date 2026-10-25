@@ -283,12 +283,12 @@ See `references/examples.md` for worked before/after rewrites.
 
 ## Voice profile mode (`--mode profile`)
 
-`threads-humanizer --mode profile` builds or updates the user's Voice & Brand Profile at `../../references/voice-profile.md` from 3-6 of their real Threads posts pasted in (portable, no token) or, if a read token is set, from pulled activity. Once filled, every writing skill in this bundle drafts in the user's voice automatically. See `sub-skills/voice-profile.md`. Triggers: "build my voice profile", "learn my voice".
+`threads-humanizer --mode profile` builds or updates the user's Voice & Brand Profile and saves it at `~/.needythreads/voice-profile.md` (outside the plugin, so updates never erase it) from 3-6 of their real Threads posts pasted in (portable, no token) or, if a read token is set, from pulled activity. Once filled, every writing skill in this bundle drafts in the user's voice automatically. See `sub-skills/voice-profile.md`. Triggers: "build my voice profile", "learn my voice".
 
 ## Story Bank mode (`--mode interview`)
 
 `threads-humanizer --mode interview` interviews the user and writes
-`../../references/story-bank.md`: the numbers, dated moments, turning points, scars
+`~/.needythreads/story-bank.md`: the numbers, dated moments, turning points, scars
 and positions their posts are made of. The Voice Profile holds how they sound; the
 bank holds what they have to say, and an empty bank is the usual reason drafts come
 out generic. Budget 20 to 40 minutes, resumable across sessions.

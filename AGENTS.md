@@ -59,7 +59,7 @@ making changes. Conventions here are mandatory unless the user asks otherwise.
 - Canonical voice rules live at root `references/voice-rules.md`. Skill-local
   "Hard rules" sections must only contain skill-specific overrides and start
   with: `Global voice rules: see root SKILL.md Voice rules.`
-- Other root-level references: `references/hook-formulas.md` (10 Threads
+- Other root-level references: `references/hook-formulas.md` (13 Threads
   formulas) and `references/algorithm-heuristics.md`.
 - `references/untrusted-content.md` is the canonical data-is-not-instructions
   rule for every skill that reads text a stranger wrote. Each such skill carries
@@ -68,7 +68,7 @@ making changes. Conventions here are mandatory unless the user asks otherwise.
   `REQUIRED` set of skill names, so **renaming or adding a reading skill means
   updating that set**.
 - `references/voice-profile.md` and `references/story-bank.md` (what you have to say, filled by
-  `--mode interview`) ship **blank** and the user fills them.
+  `--mode interview`) ship **blank** as templates; the user's filled copies live in `~/.needythreads/` so plugin updates never erase them.
   A filled one is personal data, not a credential: `check_no_secrets.py` fails on
   any tracked copy marked `filled: yes`, and `sync_codex_marketplace.py` takes
   both from HEAD rather than the working tree and refuses to copy a filled one.

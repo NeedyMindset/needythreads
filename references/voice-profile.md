@@ -1,7 +1,7 @@
 # Profil de voix et de marque (Voice & Brand Profile)
 
 Ta voix, ta niche et tes règles au même endroit. Remplis-le une fois (ou laisse `threads-humanizer --mode profile` le construire à partir de quelques-uns de tes vrais posts), et chaque skill d'écriture de ce bundle Threads le lit avant de rédiger : tu n'as plus à réexpliquer qui tu es à chaque demande.
-Ce fichier t'appartient : modifie-le librement. Rien n'est envoyé nulle part, il sert seulement à orienter les brouillons. Les skills ne le chargent que si `filled: yes` figure ci-dessous ; un gabarit vide est ignoré.
+Ceci est le gabarit vide du plugin. Ta version remplie est enregistrée dans `~/.needythreads/voice-profile.md`, en dehors du plugin, pour que les mises à jour ne l'effacent pas. Modifie-la librement. Rien n'est envoyé nulle part, il sert seulement à orienter les brouillons. Les skills ne le chargent que si `filled: yes` figure ci-dessous ; un gabarit vide est ignoré.
 
 ## Statut (Status)
 

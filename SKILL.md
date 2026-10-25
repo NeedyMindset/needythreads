@@ -137,8 +137,8 @@ distinction.
 
 - [Publora API docs](https://docs.publora.com) - endpoint reference for the publishing layer
 - `lib/publora_client.py` - thin Python client used by the writing skill
-- `references/story-bank.md` - what you have to say, filled by the interview
-- `references/voice-profile.md` - how you sound, filled by `--mode profile`
+- `~/.needythreads/story-bank.md` - what you have to say, filled by the interview (blank template: `references/story-bank.md`)
+- `~/.needythreads/voice-profile.md` - how you sound, filled by `--mode profile` or the 5-question onboarding (blank template: `references/voice-profile.md`)
 - `lib/url_parser.py` - Threads URL to handle/post-id parser
 
 ## Acknowledgments

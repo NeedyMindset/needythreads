@@ -6,7 +6,7 @@ Chaque skill d'écriture de ce bundle le lit avant de rédiger : il arrête de t
 
 Sur Threads, les sections qui rapportent le plus sont les Tournants et les Histoires récurrentes : la plateforme vit de la conversation, et une histoire invite à répondre là où une affirmation invite à scroller. Les Positions comptent toujours, mais formulées comme les tiennes, pas comme une correction adressée au lecteur.
 
-> **Garde ce fichier hors de git.** Il contient des détails de carrière, des chiffres, des échecs et des noms de personnes. C'est un fichier du dépôt : un push l'emporte partout où tu pousses, y compris vers un fork public. Ajoute `references/story-bank.md` à ton `.gitignore` avant de le remplir, ou garde la copie remplie hors du dépôt. Rien ici n'est envoyé à nous ni à un service ; git est le seul moyen par lequel il voyage.
+> **Garde ce fichier hors de git.** Il contient des détails de carrière, des chiffres, des échecs et des noms de personnes. Ceci est le gabarit vide du plugin. Ta version remplie est enregistrée dans `~/.needythreads/story-bank.md`, en dehors du plugin : une mise à jour ne l'efface pas et elle n'est jamais envoyée dans git. Rien ici n'est envoyé à un service.
 
 Remplis-le en lançant `threads-humanizer --mode interview`, qui t'interroge et écrit ce fichier. Tu peux aussi le modifier à la main à tout moment ; le skill lit ce qui s'y trouve.
 

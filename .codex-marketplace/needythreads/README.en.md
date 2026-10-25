@@ -39,7 +39,7 @@ The right skill activates automatically. Then you review and approve.
 
 A banner may ask you to give the Claude GitHub App access to the repository. You can ignore it: the plugin works without it, and it only matters for automatic updates.
 
-Last checked on claude.ai on 25 October 2026 with release v1.0.40.
+Install flow tested on claude.ai on 25 October 2026 (latest tested release: v1.0.42).
 
 In claude.ai you get drafts to copy-paste into Threads. To let Claude publish for you, use Claude Code or Codex on your computer (see [Optional: auto-post with Publora](#optional-auto-post-with-publora)).
 
@@ -192,6 +192,10 @@ Every skill shows you a draft first and waits for your OK. Nothing gets posted w
 Threads caps a post at **500 characters** (10,000 if you attach the longer-form text). For anything longer, you build a multi-post thread. Doing that on the native Threads API means creating a container for post 1, publishing it, then creating each next post with a `reply_to_id` pointing at the previous one, and handling partial failures.
 
 This bundle hands the whole chain to [Publora](https://publora.com). You write the thread as one block (or split it with `---`), and Publora auto-splits it into a connected multi-post thread at paragraph then sentence boundaries, and posts it in one call. Unlike X, Threads does not add `(1/N)` markers by default. The Post Writer skill uses this on approval.
+
+## Your profile (once)
+
+The first time, `threads-post-writer` asks you 5 questions (2 minutes). It then offers to keep your profile: on your computer (Claude Code, Codex) it saves it in `~/.needythreads/`, outside the plugin, so an update never erases it. In claude.ai it gives you a block to paste into your Claude project instructions. For a fuller profile, write `threads-humanizer --mode profile` (learns your voice from 3 to 6 of your posts) or `threads-humanizer --mode interview` (20 to 40 minutes of questions). These are keywords to write to Claude, not terminal commands.
 
 ## Optional: auto-post with Publora
 
