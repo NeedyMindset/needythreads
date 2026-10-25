@@ -1,115 +1,88 @@
-# Story Bank
+# Banque d'histoires (Story Bank)
 
-The raw material your Threads posts are made of: what you have actually done, in
-numbers, with names and dates. The Voice Profile holds *how you sound*. This holds
-*what you have to say*.
+La matière brute de tes posts Threads : ce que tu as réellement fait, en chiffres, avec des noms et des dates. Le Profil de voix contient *comment tu parles*. Celui-ci contient *ce que tu as à dire*.
 
-Every writing skill in this bundle reads it before drafting, so it stops asking you
-for "a specific number or moment" on every single request and starts drawing from
-what you already told it once.
+Chaque skill d'écriture de ce bundle le lit avant de rédiger : il arrête de te demander « un chiffre précis ou un moment » à chaque demande et puise dans ce que tu lui as déjà dit une fois.
 
-On Threads the sections that earn the most are Turning points and Recurring
-stories: the platform runs on conversation, and a story invites a reply where
-a claim invites a scroll. Positions still matter, but stated as yours rather
-than as a correction to the reader.
+Sur Threads, les sections qui rapportent le plus sont les Tournants et les Histoires récurrentes : la plateforme vit de la conversation, et une histoire invite à répondre là où une affirmation invite à scroller. Les Positions comptent toujours, mais formulées comme les tiennes, pas comme une correction adressée au lecteur.
 
-> **Keep this out of git.** It holds career detail, figures, failures and named
-> people. It is a file in this repository, so a push carries it wherever you push,
-> a public fork included. Add `references/story-bank.md` to your `.gitignore`
-> before you fill it, or keep the filled copy outside the repo. Nothing here is
-> sent to us or to any service; git is the only way it travels.
+> **Garde ce fichier hors de git.** Il contient des détails de carrière, des chiffres, des échecs et des noms de personnes. C'est un fichier du dépôt : un push l'emporte partout où tu pousses, y compris vers un fork public. Ajoute `references/story-bank.md` à ton `.gitignore` avant de le remplir, ou garde la copie remplie hors du dépôt. Rien ici n'est envoyé à nous ni à un service ; git est le seul moyen par lequel il voyage.
 
-Fill it by running `threads-humanizer --mode interview`, which interviews you and writes
-this file. You can also edit it by hand at any time; the skill reads whatever is here.
+Remplis-le en lançant `threads-humanizer --mode interview`, qui t'interroge et écrit ce fichier. Tu peux aussi le modifier à la main à tout moment ; le skill lit ce qui s'y trouve.
 
-## Status
+## Statut (Status)
 
 - filled: no
 - updated: (date)
-- sessions: (how many interviews have contributed)
+- sessions: (nombre d'interviews qui y ont contribué)
 
 ---
 
-## 1. What you are working on
+## 1. Sur quoi tu travailles (What you are working on)
 
-The current thing, described the way you would say it out loud. Threads rewards
-the half-finished and the honest, so this section does not need a polished
-answer to be usable.
+Le projet en cours, décrit comme tu le dirais à voix haute. Threads récompense l'inachevé et l'honnête : cette section n'a pas besoin d'une réponse polie pour être utile.
 
 - (...)
 
-## 2. Receipts
+## 2. Chiffres clés (Receipts)
 
-The numbers you can state without checking. This is the section drafts reach for
-most, because one odd-precision figure with a named referent is the single
-strongest signal that a human wrote the post.
+Les chiffres que tu peux citer sans vérifier. C'est la section que les brouillons utilisent le plus, car un chiffre à la précision inhabituelle avec un référent nommé est le signal le plus fort qu'un humain a écrit le post.
 
-Good: "cut deploy time from 22 minutes to 9, team of four, Q2 2025".
-Useless: "improved efficiency significantly".
+Bien : « délai de déploiement passé de 22 à 9 minutes, équipe de quatre, T2 2025 ».
+Inutile : « efficacité nettement améliorée ».
 
-- (number, what it measures, when, who or what it belongs to)
+- (chiffre, ce qu'il mesure, quand, à qui ou à quoi il se rapporte)
 
-## 3. Shipped
+## 3. Réalisations (Shipped)
 
-Things that exist because you worked on them. Products, migrations, hires, papers,
-events, rescues.
+Ce qui existe parce que tu y as travaillé. Produits, migrations, recrutements, articles, événements, sauvetages.
 
-- (what it was, your part in it, what it cost or returned)
+- (ce que c'était, ta part, ce que ça a coûté ou rapporté)
 
-## 4. Turning points
+## 4. Tournants (Turning points)
 
-The moments where you changed your mind or the plan changed under you. These carry
-posts better than successes do, and they are the hardest to invent.
+Les moments où tu as changé d'avis ou où le plan a changé sous tes pieds. Ils portent mieux les posts que les réussites, et ce sont les plus difficiles à inventer.
 
-- (what happened, what you believed before, what you believe now)
+- (ce qui s'est passé, ce que tu croyais avant, ce que tu crois maintenant)
 
-## 5. Scars
+## 5. Cicatrices (Scars)
 
-What went wrong and what it taught you. Kept separate from turning points because
-the shape differs: a scar is a cost you paid, not a view you revised.
+Ce qui a mal tourné et ce que ça t'a appris. Séparé des tournants car la forme diffère : une cicatrice est un coût payé, pas un avis révisé.
 
-- (what broke, the real cost, what you do differently)
+- (ce qui a cassé, le coût réel, ce que tu fais autrement)
 
-## 6. Positions
+## 6. Positions (Positions)
 
-Opinions you would defend in a room that disagreed. A position with no cost to
-holding it is not a position; note what holding it costs you.
+Des opinions que tu défendrais devant une salle qui n'est pas d'accord. Une position qui ne coûte rien à tenir n'en est pas une ; note ce que la tenir te coûte.
 
-- (the claim, who disagrees, why you hold it anyway)
+- (l'affirmation, qui n'est pas d'accord, pourquoi tu la tiens quand même)
 
-## 7. Recurring stories
+## 7. Histoires récurrentes (Recurring stories)
 
-The three or four you already tell out loud, at dinner or in interviews. They are
-proven: you know they land. Write them here before a draft dulls them.
+Les trois ou quatre que tu racontes déjà à voix haute, au dîner ou en entretien. Elles ont fait leurs preuves : tu sais qu'elles touchent. Écris-les ici avant qu'un brouillon ne les émousse.
 
-- (the story in two lines, and the point it makes)
+- (l'histoire en deux lignes, et le point qu'elle illustre)
 
-## 8. Names you can use
+## 8. Noms que tu peux citer (Names you can use)
 
-People, companies, tools and places you are free to name in public, and the ones
-you are not. Drafts stay vague when they do not know which is which.
+Personnes, entreprises, outils et lieux que tu peux nommer en public, et ceux que tu ne peux pas. Les brouillons restent vagues quand ils ne savent pas lesquels sont lesquels.
 
-- Free to name: (...)
-- Never name: (...)
-- Ask first: (...)
+- Libre de nommer : (...)
+- Ne jamais nommer : (...)
+- Demander d'abord : (...)
 
-## 9. Off limits
+## 9. Hors limites (Off limits)
 
-Subjects that stay out of posts regardless of how well they would perform: active
-deals, litigation, health, other people's business, anything under NDA.
+Sujets qui restent hors des posts quelle que soit leur performance : affaires en cours, litiges, santé, affaires des autres, tout ce qui est sous NDA.
 
 - (...)
 
 
 ---
 
-## How drafts use this
+## Comment les brouillons l'utilisent
 
-- A draft needs a concrete detail: it takes one from **Receipts** or **Shipped**
-  rather than asking you mid-session.
-- A hook needs a reversal or a confession: **Turning points** and **Scars** are
-  where those live.
-- A post needs an argument: **Positions** supplies the claim and the opposition.
-- Anything a draft cannot source from here, it asks about or leaves out. It does
-  not invent a number. If you see an unfamiliar figure in a draft, that is a bug
-  worth reporting.
+- Un brouillon a besoin d'un détail concret : il le prend dans **Chiffres clés** ou **Réalisations** plutôt que de te le demander en pleine session.
+- Une accroche a besoin d'un renversement ou d'un aveu : c'est dans **Tournants** et **Cicatrices** qu'ils se trouvent.
+- Un post a besoin d'un argument : **Positions** fournit l'affirmation et l'opposition.
+- Tout ce qu'un brouillon ne peut pas sourcer ici, il le demande ou l'omet. Il n'invente pas de chiffre. Si tu vois un chiffre inconnu dans un brouillon, c'est un bug à signaler.

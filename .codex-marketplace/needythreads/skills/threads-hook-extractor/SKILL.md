@@ -1,6 +1,6 @@
 ---
 name: threads-hook-extractor
-description: "Reverse-engineer the hook from a viral Threads post or thread URL. Identifies which of the 10 canonical 2026 Threads formulas it uses (warm contrarian, data-point, build-in-public, quote-post, mini-list, relatable, listicle, story, curiosity-gap, how-I teardown), explains why it worked, and returns a blank template mapped to your topic with its primary goal (replies, reposts, likes, quotes). Use to learn from a post you admire. Not for writing your own (use threads-post-writer)."
+description: "Décortique l'accroche d'un post ou thread Threads viral à partir de son URL : identifie laquelle des 10 formules Threads 2026 il utilise, explique pourquoi elle marche, puis donne un modèle vierge adapté à ton sujet avec son objectif principal (réponses, republications, likes, citations). Mots-clés : analyser une accroche, hook teardown. Pas pour écrire ton propre post (utiliser threads-post-writer)."
 ---
 
 # Threads Hook Extractor

@@ -1,6 +1,6 @@
 ---
 name: threads-humanizer
-description: "Remove the AI tells readers react to in a Threads post: 2026 vocabulary by density, reveal bridges, staccato stacks, stacked triads, performed sincerity. Also --mode audit (500-char fit, hook, hashtag cap), --mode profile (learns how you write) and --mode interview (fills your Story Bank: the numbers, turning points and stories posts are made of). Not for writing from scratch (use threads-post-writer). Keywords: humanize, de-AI Threads post, interview me, audit before posting."
+description: "Retire les signes d'un texte écrit par IA dans un post Threads : vocabulaire IA 2026 par densité, transitions de révélation, phrases en rafales, triades empilées, sincérité jouée. Modes : --mode audit (500 caractères, accroche, 1 hashtag), --mode profile (apprend ta façon d'écrire), --mode interview (remplit ta banque d'histoires). Mots-clés : humaniser, interview me. Pas pour écrire de zéro (utiliser threads-post-writer)."
 ---
 
 # Threads Humanizer V3

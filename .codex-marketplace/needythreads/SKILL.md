@@ -1,6 +1,6 @@
 ---
 name: threads-marketing
-description: "Plan, draft, audit, and publish posts and threads for Threads (Meta). Use when the user wants to write a single Threads post or a multi-post thread, remove AI tells from a draft, reverse-engineer the hook from a viral Threads post, draft a reply or quote post, or plan a week of Threads content. Posts and threads publish via the Publora API, which auto-splits long content into a connected multi-post thread. User provides notes or a post URL, the skill drafts, the user approves, then it publishes."
+description: "Planifie, rédige, audite et publie des posts et threads pour Threads (Meta). À utiliser pour écrire un post ou un thread, retirer les signes d'IA d'un brouillon, décortiquer une accroche virale, rédiger une réponse ou une citation, ou planifier une semaine de contenu. Les posts et threads sont publiés via Publora après ton accord. Mots-clés : Threads, Meta, post, thread."
 ---
 
 # Threads (Meta) Marketing Skills
@@ -99,6 +99,10 @@ normally.
 
 (Canonical reference: `references/voice-rules.md`. See also
 `references/hook-formulas.md` and `references/algorithm-heuristics.md`.)
+
+## Language
+
+Answer and draft in the language the user writes in. When the user writes French, write the posts in French, with the same intent as the voice rules: no corporate filler (« tirer parti », « booster », « révolutionnaire »), specific numbers, one idea per post, warm tone, 500 characters, one hashtag at most. Keep accents and French punctuation; use « » only to quote.
 
 ## How Threads URLs map
 

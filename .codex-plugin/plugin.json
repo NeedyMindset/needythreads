@@ -1,7 +1,7 @@
 {
   "name": "needythreads",
-  "description": "8 Claude Code and Codex skills for Threads (Meta) marketing: single-post and multi-post thread writing, AI-tell humanizer with pre-publish audit, viral hook extraction, reply and quote drafting, profile optimization, content repurposing, audience insights, and weekly content planning. Publora is the default publish layer for Threads posts and threads.",
-  "version": "1.0.41",
+  "description": "8 skills Claude Code et Codex pour le marketing sur Threads (Meta) : rédaction de posts et de threads, humanizer avec audit avant publication, décorticage d'accroches virales, brouillons de réponses et de citations, optimisation de profil, adaptation de contenu, analyse d'audience et planning de contenu hebdomadaire. Publora est la couche de publication par défaut.",
+  "version": "1.0.42",
   "author": {
     "name": "Olivier C.",
     "url": "https://github.com/NeedyMindset"
@@ -24,8 +24,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Threads (Meta) Skills",
-    "shortDescription": "Threads (Meta) marketing skills for Claude Code and Codex.",
-    "longDescription": "A bundle of 8 Threads (Meta) marketing skills for Claude Code and Codex: single-post and multi-post thread writing, humanizing, hook extraction, reply and quote drafting, and content planning.",
+    "shortDescription": "Skills de marketing Threads (Meta) pour Claude Code et Codex.",
+    "longDescription": "Un bundle de 8 skills de marketing Threads (Meta) pour Claude Code et Codex : rédaction de posts et de threads, humanizer, décorticage d'accroches, brouillons de réponses et de citations, planning de contenu.",
     "developerName": "Olivier C.",
     "category": "Productivity",
     "capabilities": [
@@ -35,9 +35,9 @@
     ],
     "websiteURL": "https://github.com/NeedyMindset/needythreads",
     "defaultPrompt": [
-      "Draft a Threads post from my notes.",
-      "Turn this into a multi-post Threads thread.",
-      "Plan a week of Threads content."
+      "Rédige un post Threads à partir de mes notes.",
+      "Transforme ça en thread Threads de plusieurs posts.",
+      "Planifie une semaine de contenu Threads."
     ],
     "brandColor": "#000000",
     "composerIcon": "./assets/icon.svg"

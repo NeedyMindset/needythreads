@@ -1,6 +1,6 @@
 ---
 name: threads-post-writer
-description: "Draft a single Threads post or a multi-post thread using a 2026 Threads hook formula (warm contrarian, data-point, build-in-public, quote-post, mini-list, relatable, listicle, story, curiosity-gap, how-I teardown), picked by goal (replies, reposts, likes, quotes). Respects the 500-char limit and one-hashtag cap, runs the humanizer pass, and publishes via Publora, which auto-splits long content into a thread. Not for auditing a draft (use threads-humanizer) or hook teardown (use threads-hook-extractor)."
+description: "Rédige un post Threads ou un thread de plusieurs posts avec une formule d'accroche Threads 2026 choisie selon l'objectif (réponses, republications, likes, citations). Respecte les 500 caractères et un seul hashtag, passe l'humanizer, puis publie via Publora après ton accord. Mots-clés : écris un post Threads, write a Threads post. Pas pour auditer un brouillon (utiliser threads-humanizer) ni décortiquer une accroche (utiliser threads-hook-extractor)."
 ---
 
 # Threads Post Writer
@@ -90,7 +90,7 @@ how the thread will land before approving.
 
 ## Steps
 
-**Voice profile first (all drafts).** If `../../references/voice-profile.md` has `filled: yes`, load it and match the user's voice fingerprint, hard rules, and CTA/link style throughout. If it is not filled, mention once that `threads-humanizer --mode profile` can learn their voice from a few posts, then proceed with the generic voice rules.
+**Voice profile first (all drafts).** If `../../references/voice-profile.md` has `filled: yes`, load it and match the user's voice fingerprint, hard rules, and CTA/link style throughout. If it is not filled, treat this as first use. Before the first draft of the conversation, ask the user once, in their own language (French if they write French), this short onboarding in a single message, then wait for the answers: « Pour écrire comme toi, j'ai besoin de 5 réponses (2 minutes). 1) Qui es-tu, en une phrase ? 2) À qui parles-tu ? 3) Un chiffre ou un résultat réel que tu peux citer. 4) Une opinion que tu défends. 5) Un post de toi dont tu es fier (colle-le). Réponds, ou dis « passer » pour un brouillon générique. » Use the answers as voice and story material for this conversation only, and never invent anything beyond them. Then say once that `threads-humanizer --mode profile` and `threads-humanizer --mode interview` save them for good in `references/voice-profile.md` and `references/story-bank.md`. If the user skips, proceed with the generic voice rules and do not ask again in this conversation.
 
 **Story bank next.** If `../../references/story-bank.md` has `filled: yes`, load it and take every concrete detail (numbers, dates, named projects, positions) from there instead of asking mid-draft. **Never invent a figure, a date or a client name that is not in the bank or supplied by the user in this conversation.** If the bank has nothing that fits, ask the user, or say once that `threads-humanizer --mode interview` fills it in 20 to 40 minutes. A draft with a plausible invented number is worse than a draft with none: one is vague, the other is a retraction.
 

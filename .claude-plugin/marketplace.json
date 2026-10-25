@@ -5,14 +5,14 @@
     "url": "https://github.com/NeedyMindset"
   },
   "metadata": {
-    "description": "Claude Code and Codex skills for Threads (Meta) growth: single-post and multi-post thread writing, AI-tell humanizer with bundled pre-publish audit, viral hook extraction, reply and quote drafting, and weekly content planning. Posts and threads publish through the Publora API."
+    "description": "Skills Claude Code et Codex pour la croissance sur Threads (Meta) : rédaction de posts et de threads, humanizer avec audit avant publication, décorticage d'accroches virales, brouillons de réponses et de citations, planning hebdomadaire. Les posts et threads sont publiés via l'API Publora."
   },
   "plugins": [
     {
       "name": "needythreads",
       "source": "./",
-      "description": "Bundle of 8 Threads (Meta) marketing skills for Claude Code and Codex with Threads-native hook formulas, single-post and multi-post thread writing, a unified humanizer (rewrite plus `--mode audit` pre-publish check), viral hook extraction, reply and quote drafting, and a weekly content planner. Posts and threads ship via Publora, which auto-splits long content into a connected multi-post thread.",
-      "version": "1.0.41",
+      "description": "8 skills Claude Code et Codex pour le marketing sur Threads (Meta) : rédaction de posts et de threads, humanizer avec audit avant publication, décorticage d'accroches virales, brouillons de réponses et de citations, optimisation de profil, adaptation de contenu, analyse d'audience et planning de contenu hebdomadaire. Publora est la couche de publication par défaut.",
+      "version": "1.0.42",
       "author": {
         "name": "Olivier C.",
         "url": "https://github.com/NeedyMindset"

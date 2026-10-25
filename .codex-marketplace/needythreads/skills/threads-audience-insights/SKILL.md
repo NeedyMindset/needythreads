@@ -1,6 +1,6 @@
 ---
 name: threads-audience-insights
-description: "Read your Threads (Meta) audience and niche from real data. Scan a niche query or hashtag for the top posts right now with likes, replies, reposts, and quotes, and pull a profile (yours or a competitor) for follower count, bio, verified status, and recent posts with engagement. Powered by Apify, no login. Triggers on \"analyze Threads\", \"what is working on Threads\", \"top posts for\", \"competitor Threads profile\", \"niche scan\", \"follower count\". Not for writing posts (use threads-post-writer)."
+description: "Lis l'audience et la niche Threads (Meta) à partir de données réelles : les meilleurs posts du moment pour une requête ou un hashtag (likes, réponses, republications, citations), et un profil (le tien ou un concurrent) avec abonnés, bio et posts récents. Via Apify, sans connexion. Mots-clés : analyser Threads, profil concurrent, niche scan. Pas pour écrire des posts (utiliser threads-post-writer)."
 ---
 
 # Threads Audience Insights
