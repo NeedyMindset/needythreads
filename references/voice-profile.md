@@ -9,6 +9,18 @@ Ceci est le gabarit vide du plugin. Ta version remplie est enregistrée dans `~/
 - source: template
 - updated: --
 
+## Légende des statuts
+
+Chaque ligne remplie porte un statut en fin de ligne :
+
+- `[confirmé]` : tu l'as écrit toi-même, avec tes mots. Les skills l'utilisent sans en changer le sens.
+- `[à confirmer]` : une déduction. Les skills te demandent avant de l'utiliser, et ne la présentent jamais comme un fait.
+- `[interdit]` : à ne jamais utiliser.
+
+Une ligne sans statut est traitée comme `[à confirmer]`. Une section vide reste vide : rien n'est deviné, ni le réseau d'où viennent tes exemples, ni ton genre, ni un lien, ni un chiffre.
+
+Ce fichier dit **comment tu écris** : voix, audience, règles, appels à l'action. Les faits de ton parcours (chiffres, histoires, noms) vivent dans la Banque d'histoires, pas ici.
+
 ## 1. Empreinte de voix (Voice fingerprint)
 
 - Rythme des phrases :
@@ -18,6 +30,7 @@ Ceci est le gabarit vide du plugin. Ta version remplie est enregistrée dans `~/
 - Mots et expressions que tu n'utilises JAMAIS :
 - Emoji :
 - Format (Threads) : 500 caractères par post ; ton chaleureux et conversationnel ; un seul hashtag maximum
+- Signature (une seule phrase de clôture ; si tu en as plusieurs, dis laquelle sert pour quel type de post) :
 
 ## 2. Qui tu es et pour qui tu écris (Who you are)
 
@@ -32,7 +45,7 @@ Ceci est le gabarit vide du plugin. Ta version remplie est enregistrée dans `~/
 
 ## 4. Liens et appel à l'action (Links and CTA)
 
-- Lien principal vers lequel tu envoies les gens :
+- Lien principal vers lequel tu envoies les gens : (laisse vide s'il n'existe pas encore : un lien n'est jamais inventé)
 - Où il se place :
 - Ton style d'appel à l'action :
 

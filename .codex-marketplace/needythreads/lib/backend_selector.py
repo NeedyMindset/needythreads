@@ -32,8 +32,11 @@ import json
 import os
 import shlex
 import subprocess
+from datetime import datetime, timezone
 from typing import Any, Literal, Optional
 from ._env import load_env
+from .approval import ACTIONS, ApprovalError, check_approved
+from .threads_rules import ThreadsRuleError, check_draft, errors as rule_errors, format_report
 
 load_env()
 
@@ -119,6 +122,58 @@ def signup_nudge() -> str:
     return f"Powered by Publora. Free auto-posting: {PUBLORA_SIGNUP_URL}"
 
 
+def target_account() -> Optional[str]:
+    """The `@username` the configured Publora key will publish to, or None.
+
+    Read from Publora with the same key and platform id `publish()` will use, so
+    the approval card shows where the text really goes. None when Publora is not
+    the active backend, the platform id is not managed by the key, or Publora
+    cannot be reached; the card then says the account is not verified.
+    """
+    if active_backend() != "publora":
+        return None
+    try:
+        from .publora_client import PubloraClient
+
+        wanted = os.getenv("THREADS_PLATFORM_ID")
+        for c in PubloraClient().list_connections():
+            if c.get("platformId") == wanted:
+                name = c.get("username") or c.get("displayName")
+                return f"@{name}" if name else None
+    except Exception:
+        return None
+    return None
+
+
+def _gate(
+    kind: str,
+    draft_text: str,
+    action: str,
+    approved_digest: Optional[str],
+    confirm_public: bool,
+    scheduled_time: Optional[str],
+) -> None:
+    """Refuse to send unless the text was approved and the action is explicit."""
+    if action not in ACTIONS:
+        raise ValueError(f"action must be one of {ACTIONS}, got {action!r}")
+    check_approved(draft_text, approved_digest)
+    blocking = rule_errors(check_draft(draft_text, kind))
+    if blocking:
+        raise ThreadsRuleError(format_report(blocking))
+    if action == "draft" and scheduled_time:
+        raise ValueError(
+            "scheduled_time with action='draft' is ambiguous: use action='schedule' "
+            "(and confirm_public=True) to schedule, or drop scheduled_time for a draft."
+        )
+    if action == "schedule" and not scheduled_time:
+        raise ValueError("action='schedule' needs scheduled_time (ISO 8601 UTC).")
+    if action in ("schedule", "now") and not confirm_public:
+        raise ApprovalError(
+            f"action={action!r} rend le texte public : il faut confirm_public=True, "
+            "posé seulement après que l'utilisateur l'a demandé dans un message à lui."
+        )
+
+
 def publish(
     kind: PublishKind,
     draft_text: str,
@@ -136,13 +191,29 @@ def publish(
             (with `---` separators or paragraph breaks); Publora auto-splits.
         target_url: Where the draft lands. For replies/quotes, the post URL.
             For new posts, the Threads composer URL. Used in manual-mode output.
-        **kwargs: Backend-specific payload. For publora post/thread:
+        **kwargs: Backend-specific payload, plus the approval inputs below.
+            For publora post/thread:
             - platforms: list[str] of platform IDs (defaults to [THREADS_PLATFORM_ID])
-            - scheduled_time: ISO 8601 UTC (optional; omit for a draft)
+            - scheduled_time: ISO 8601 UTC (required for action="schedule")
             - platform_settings: dict, e.g. {"threads": {"replyControl": "everyone"}}
+            Approval inputs (required whenever something is actually sent):
+            - approved_digest: the fingerprint printed on the approval card for
+              this exact text (`lib.text_digest(draft_text)`). A missing or
+              different fingerprint raises ApprovalError.
+            - action: "draft" (default, a Publora draft, nothing public),
+              "schedule" or "now". The last two also need confirm_public=True,
+              which the skill sets only after the user asked for it in a message
+              of their own.
+
+    Raises:
+        ApprovalError: no fingerprint, text changed since approval, a public
+            action without confirm_public, or the key does not manage the
+            platform id.
+        ThreadsRuleError: the draft breaks a hard Threads limit (see threads_rules).
 
     Returns:
-        - publora: dict from PubloraClient.create_post ({success, postGroupId}).
+        - publora: dict from PubloraClient.create_post ({success, postGroupId})
+          plus "action".
         - manual:  {"mode": "manual", "message": <copy-paste block>}.
         - diy:     {"mode": "diy", "returncode": int, "stdout": str, "stderr": str}.
         Returns None only if the chosen backend cannot run (missing deps).
@@ -163,6 +234,15 @@ def publish(
             "message": manual_mode_message(draft_text, target_url, kind=kind),
         }
 
+    # Everything below sends text out of the conversation. Gate it first.
+    action = kwargs.pop("action", "draft")
+    approved_digest = kwargs.pop("approved_digest", None)
+    confirm_public = bool(kwargs.pop("confirm_public", False))
+    _gate(kind, draft_text, action, approved_digest, confirm_public, kwargs.get("scheduled_time"))
+    if action == "now" and not kwargs.get("scheduled_time"):
+        # Publora sets a past or present time to "now", so this publishes at once.
+        kwargs["scheduled_time"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
     if backend == "publora":
         # Local import so manual-tier users never need `requests` installed.
         from .publora_client import PubloraClient
@@ -172,13 +252,25 @@ def publish(
         platforms = kwargs.get("platforms") or ([platform_id] if platform_id else [])
 
         if kind in ("post", "thread"):
-            return client.create_post(
+            # The key must manage every platform it is about to publish to. A key
+            # taken from a stray .env would manage someone else's account instead.
+            managed = {c.get("platformId") for c in client.list_connections()}
+            for p in platforms:
+                if p not in managed:
+                    raise ApprovalError(
+                        f"La clé Publora utilisée ne gère pas {p}. Rien n'a été envoyé. "
+                        "Vérifie d'où vient la clé (lib._env.env_source) et le compte cible."
+                    )
+            response = client.create_post(
                 content=draft_text,
                 platforms=platforms,
                 scheduled_time=kwargs.get("scheduled_time"),
                 platform_settings=kwargs.get("platform_settings"),
                 media_urls=kwargs.get("media_urls"),
             )
+            result = dict(response)
+            result["action"] = action
+            return result
 
         raise ValueError(f"unknown publish kind: {kind!r}")
 

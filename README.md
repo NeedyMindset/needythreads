@@ -284,11 +284,17 @@ Pour refaire seulement la partie clé plus tard : `python scripts/configure_env.
 pip install requests python-dotenv
 ```
 
-**Étape 7.** Teste. Demande à Claude Code ou à Codex :
+**Étape 7.** Teste, sans rien rendre public. Demande à Claude Code ou à Codex : « Écris un post Threads de test sur [un sujet] ». Quand la carte de validation s'affiche (elle montre le texte, les contrôles, le **compte cible** et l'empreinte du texte), réponds **brouillon**. Si Publora renvoie un `postGroupId`, c'est bon : ouvre le dashboard Publora, vérifie le brouillon, puis supprime-le. Si tu obtiens une erreur HTTP 401, ta clé API est incorrecte. Si tu obtiens l'erreur `Invalid platform ID format`, ton `THREADS_PLATFORM_ID` est incorrect. Si tu obtiens « La clé Publora utilisée ne gère pas threads-… », la clé ne correspond pas à ce compte Threads. Voir [Dépannage](#dépannage).
 
-> "Programme un post Threads de test via Publora dans 24 heures : 'test de la connexion API, je l'annulerai dans le dashboard'."
+### Comment un post part : trois actions, un accord à chaque fois
 
-Si Publora renvoie un `postGroupId`, c'est bon. Annule le post dans le dashboard Publora avant l'heure programmée. Si tu obtiens une erreur HTTP 401, ta clé API est incorrecte. Si tu obtiens l'erreur `Invalid platform ID format`, ton `THREADS_PLATFORM_ID` est incorrect. Voir [Dépannage](#dépannage).
+1. **Rédiger.** Le texte s'affiche dans une carte de validation. « oui » ou « ok » valident le texte seulement : rien n'est créé.
+2. **Brouillon Publora.** Seulement si tu dis « brouillon ». Rien n'est public.
+3. **Programmer ou publier.** Seulement si tu le demandes dans un message à part (« programme demain à 19 h », « publie maintenant »).
+
+La carte porte une **empreinte** du texte : si le texte change après ta validation, l'envoi est refusé et une nouvelle carte est demandée. Avant tout envoi, le code contrôle aussi 500 caractères par post, un hashtag maximum, et que ta clé Publora gère bien le compte Threads cible.
+
+**Où sont lues tes clés.** D'abord les variables d'environnement, puis `~/.needythreads/.env`, puis un `.env` du dossier de travail. Un `.env` trouvé dans un dossier téléchargé ne remplace jamais ta clé : s'il en définit une autre, elle est ignorée et signalée sur la carte.
 
 > **À propos des réponses :** une réponse au post d'un autre utilisateur est un post séparé que le `create-post` de Publora ne peut pas cibler, donc le Reply Drafter renvoie toujours son brouillon sous forme de bloc à copier-coller que tu publies toi-même. Les posts uniques et tes propres threads sont publiés automatiquement.
 
@@ -339,6 +345,8 @@ Chaque skill suit automatiquement ces règles :
 | Les skills ne s'activent pas quand je parle de Threads | Vérifie qu'il apparaît comme ajouté dans Personnalisation > Plugins sur claude.ai (ou qu'il a été installé avec `claude plugin install` ou `codex plugin add`). Essaie une nouvelle conversation. |
 | Aucune question au départ, ou la réponse parle de fichiers qui ne sont pas à toi | Deux causes possibles : (1) le plugin n'est pas actif (fiche avec « Ajouter » ou « Désactivé » : clique sur **Ajouter**) ; (2) la conversation s'ouvre dans un dossier qui contient un `CLAUDE.md` (le tien ou celui d'un autre projet) dont les règles passent avant celles du plugin. Ouvre une nouvelle conversation depuis un dossier vide. |
 | Il manque une fonction annoncée (par exemple les 5 questions de départ) ou « Cette marketplace est déjà ajoutée » | Tu as une copie figée d'une ancienne version. Fais **Rechercher des mises à jour** dans **Gérer les marketplaces** (voir [Mettre à jour le plugin](#mettre-à-jour-le-plugin)), vérifie le numéro de version dans la fiche du plugin, puis ouvre une nouvelle conversation. |
+| « La clé Publora utilisée ne gère pas threads-… » | La clé lue n'appartient pas au compte de ton `THREADS_PLATFORM_ID` (clé d'un autre compte, ou `.env` d'un dossier étranger). Rien n'a été envoyé. Regarde « Clé lue dans » et « Compte cible » sur la carte, puis corrige `~/.needythreads/.env`. |
+| « Aucune empreinte d'approbation » ou « Le texte a changé depuis la validation » | Normal : le texte a été modifié après ta validation, ou la carte n'a pas été montrée. Demande une nouvelle carte et valide-la. |
 | « Failed to add marketplace ... its network source differs » | Une marketplace nommée `needythreads` est déjà enregistrée avec une autre source (un dossier local, par exemple). Supprime-la puis ajoute-la à nouveau : `claude plugin marketplace remove needythreads`, puis `claude plugin marketplace add NeedyMindset/needythreads`. |
 | Taper `/plugin ...` ouvre une fenêtre et rien ne s'installe | C'est le comportement de l'application Claude Desktop pour `/plugin`. Utilise les étapes claude.ai (Personnalisation > Plugins) ou lance `claude plugin ...` dans un terminal. |
 | "PUBLORA_API_KEY not set" | Ton fichier `.env` est absent ou au mauvais endroit. Mets-le dans `~/.needythreads/.env` (ton dossier personnel) ou lance `python scripts/configure_env.py`. |
@@ -384,21 +392,27 @@ needythreads/
 
 ```python
 import sys; sys.path.insert(0, "path/to/needythreads")
-from lib import parse_threads_url, PubloraClient, publish
+from lib import parse_threads_url, PubloraClient, publish, render_approval_card, target_account, text_digest
 
 parsed = parse_threads_url("https://www.threads.net/@needymindsetshop/post/C8H9abcDEf_")
 print(parsed["handle"], parsed["post_id"])  # needymindsetshop C8H9abcDEf_
 
 # Côté écriture (Publora) - un post unique ou un thread (le contenu long est découpé automatiquement)
 client = PubloraClient()  # lit PUBLORA_API_KEY dans l'environnement
+# Bas niveau : n'applique NI la validation du texte NI les contrôles Threads.
 client.create_post(
     content="First post of the thread\n\n---\n\nSecond post\n\n---\n\nThird post",
     platforms=["threads-17841412345678"],
 )
 
-# Ou utilise l'enveloppe de haut niveau qui gère l'aiguillage manuel / Publora / diy
-publish("thread", draft_text="...", target_url="https://www.threads.com/",
-        platforms=["threads-17841412345678"])
+# Ou utilise l'enveloppe de haut niveau (manuel / Publora / diy). Elle exige la validation du texte :
+# sans l'empreinte de la carte, ou si le texte a changé depuis, elle refuse d'envoyer.
+text = "Premier post\n\n---\n\nDeuxième post"
+print(render_approval_card(kind="thread", preview_text=text, account=target_account()))
+# ... l'utilisateur lit la carte et répond « brouillon » ...
+publish("thread", draft_text=text, target_url="https://www.threads.com/",
+        platforms=["threads-17841412345678"],
+        action="draft", approved_digest=text_digest(text))  # "schedule" / "now" : ajouter confirm_public=True
 ```
 
 ## Gestion des URL

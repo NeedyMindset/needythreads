@@ -26,7 +26,7 @@ never required.
 2. Extract the voice fingerprint from the samples, not from assumptions: sentence
    rhythm, recurring openers, punctuation habits, favored vocabulary, words they
    avoid, emoji/hashtag behavior.
-3. Infer niche, ICP, and pillars from the sample topics; confirm rather than guess.
+3. Infer niche, ICP, and pillars from the sample topics, mark each inference `[à confirmer]` and confirm with the user rather than guess. Never infer the social network the samples came from, nor gender, from style or emoji: ask.
 4. Capture hard rules and CTA/link style the samples reveal or the user states.
 5. Write `~/.needythreads/voice-profile.md` (create the folder if needed, start from the template structure): fill sections 1-5 (write section 2 in the second person, "Tu es...", in the user's words, and never infer gender or pronouns from a name), copy the 2-4
    strongest lines verbatim into "Signature examples", and set the Status block to

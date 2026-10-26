@@ -12,13 +12,15 @@ load_env()
 from .url_parser import parse_threads_url
 from .publora_client import PubloraClient, PubloraError
 from .pixfaro_client import PixfaroClient, PixfaroError
-from .approval import render_approval_card
+from .approval import ApprovalError, render_approval_card, text_digest
+from .threads_rules import ThreadsRuleError, check_draft, format_report
 from .apify_client import ApifyClient, ApifyError, ApifyAuthError
 from .backend_selector import (
     image_backend,
     active_backend,
     manual_mode_message,
     publish,
+    target_account,
     illustrate,
     refine,
     available_models,
@@ -29,9 +31,15 @@ __all__ = [
     "PubloraClient",
     "PubloraError",
     "render_approval_card",
+    "text_digest",
+    "ApprovalError",
+    "ThreadsRuleError",
+    "check_draft",
+    "format_report",
     "active_backend",
     "manual_mode_message",
     "publish",
+    "target_account",
     "ApifyClient",
     "ApifyError",
     "ApifyAuthError",

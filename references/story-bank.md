@@ -16,6 +16,16 @@ Remplis-le en lançant `threads-humanizer --mode interview`, qui t'interroge et 
 - updated: (date)
 - sessions: (nombre d'interviews qui y ont contribué)
 
+## Légende des statuts
+
+Chaque fait porte un statut en fin de ligne :
+
+- `[confirmé]` : tu l'as écrit toi-même, avec tes mots. Les skills l'utilisent sans en changer le sens, et sans ajouter de détail, de dialogue ou d'émotion qui n'y figure pas.
+- `[à confirmer]` : une déduction ou une donnée qui peut avoir changé. Les skills te demandent avant de l'utiliser.
+- `[interdit]` : à ne jamais utiliser.
+
+Un chiffre qui évolue (membres d'une plateforme, chiffre d'affaires) garde sa source et la date où tu l'as vérifié. Ce fichier dit **ce que tu as à dire** ; la manière de le dire vit dans le Profil de voix.
+
 ---
 
 ## 1. Sur quoi tu travailles (What you are working on)
@@ -31,7 +41,7 @@ Les chiffres que tu peux citer sans vérifier. C'est la section que les brouillo
 Bien : « délai de déploiement passé de 22 à 9 minutes, équipe de quatre, T2 2025 ».
 Inutile : « efficacité nettement améliorée ».
 
-- (chiffre, ce qu'il mesure, quand, à qui ou à quoi il se rapporte)
+- (chiffre, ce qu'il mesure, quand, à qui ou à quoi il se rapporte, source et date de vérification) [confirmé]
 
 ## 3. Réalisations (Shipped)
 

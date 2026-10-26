@@ -32,8 +32,11 @@ Every action-taking skill follows three steps:
    `lib/url_parser.py` to extract the handle and post id.
 2. **Draft the content.** The skill applies 2026 research (Threads hook formulas,
    timing, voice rules, ranking heuristics) and shows the draft to the user.
-3. **Wait for approval.** The user replies "post", "yes", or suggests edits.
-   Only after explicit approval does the skill call Publora to publish.
+3. **Wait for approval, then for an action.** "yes" approves the wording only. A
+   Publora draft needs the word "brouillon" (or an equally explicit request);
+   scheduling or publishing needs a request of its own. The approval card carries a
+   fingerprint of the exact text, and `publish()` refuses a text that changed
+   after approval.
 
 ## Prerequisites
 
@@ -47,7 +50,8 @@ skills before committing to any backend.
 
 ### Tier 1 - Publora auto-post (recommended, ~2 min)
 
-On approval, the writer skill auto-publishes to Threads via the
+On your request (draft, schedule or publish, each asked separately), the writer
+skill sends to Threads via the
 [Publora API](https://publora.com). Pass long content and Publora auto-splits it
 into a connected multi-post thread at paragraph then sentence boundaries.
 

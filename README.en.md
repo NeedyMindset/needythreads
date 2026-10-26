@@ -284,11 +284,17 @@ To redo only the key part later: `python scripts/configure_env.py`.
 pip install requests python-dotenv
 ```
 
-**Step 7.** Test it. Ask Claude Code or Codex:
+**Step 7.** Test it, without making anything public. Ask Claude Code or Codex: "Write a test Threads post about [a topic]". When the approval card appears (it shows the text, the checks, the **target account** and the text fingerprint), answer **draft** (the French word "brouillon" works too). If Publora returns a `postGroupId`, you're set: open the Publora dashboard, check the draft, then delete it. If you get HTTP 401, your API key is wrong. If you get `Invalid platform ID format`, your `THREADS_PLATFORM_ID` is wrong. If you get "La clé Publora utilisée ne gère pas threads-..." (the key does not manage that platform), the key does not match that Threads account. See [Troubleshooting](#troubleshooting).
 
-> "Schedule a test Threads post via Publora 24 hours from now: 'testing the API connection, will cancel in dashboard'."
+### How a post goes out: three actions, one approval each
 
-If Publora returns a `postGroupId`, you're set. Cancel the post in the Publora dashboard before the scheduled time. If you get HTTP 401, your API key is wrong. If you get a `Invalid platform ID format` error, your `THREADS_PLATFORM_ID` is wrong. See [Troubleshooting](#troubleshooting).
+1. **Write.** The text appears in an approval card. "yes" or "ok" approve the wording only: nothing is created.
+2. **Publora draft.** Only if you say "draft". Nothing becomes public.
+3. **Schedule or publish.** Only if you ask for it in a message of its own ("schedule tomorrow at 7 pm", "publish now").
+
+The card carries a **fingerprint** of the text: if the text changes after you approved it, sending is refused and a new card is required. Before anything is sent, the code also checks 500 characters per post, one hashtag at most, and that your Publora key really manages the target Threads account.
+
+**Where your keys are read from.** Environment variables first, then `~/.needythreads/.env`, then a `.env` in the working folder. A `.env` found in a downloaded folder never replaces your key: if it defines another one, it is ignored and flagged on the card.
 
 > **Note on replies:** a reply to another user's post is a separate post that Publora's `create-post` cannot target, so the Reply Drafter always returns its draft as a copy-paste block for you to post yourself. Single posts and your own threads auto-publish.
 
@@ -338,6 +344,8 @@ Every skill follows these rules automatically:
 | Skills don't activate when I ask about Threads | Make sure it shows as added under Customize > Plugins in claude.ai (or was installed with `claude plugin install` or `codex plugin add`). Try a new conversation. |
 | No questions at start, or the answer talks about files that are not yours | Two possible causes: (1) the plugin is not active (page shows "Add" or "Disabled": click **Add**); (2) the conversation opens in a folder that contains a `CLAUDE.md` (yours or another project's) whose rules take priority over the plugin's. Open a new conversation from an empty folder. |
 | A documented feature is missing (for example the 5 first-use questions) or "This marketplace is already added" | You have a frozen copy of an old version. Use **Check for updates** in **Manage marketplaces** (see [Update the plugin](#update-the-plugin)), check the version number on the plugin page, then open a new conversation. |
+| "La clé Publora utilisée ne gère pas threads-..." (the key does not manage that platform) | The key that was read does not belong to the account of your `THREADS_PLATFORM_ID` (another account's key, or a `.env` from a foreign folder). Nothing was sent. Check "Clé lue dans" and "Compte cible" on the card, then fix `~/.needythreads/.env`. |
+| "Aucune empreinte d'approbation" or "Le texte a changé depuis la validation" | Expected: the text was edited after you approved it, or the card was not shown. Ask for a new card and approve it. |
 | "Failed to add marketplace ... its network source differs" | A marketplace named `needythreads` is already registered with a different source (a local folder, for example). Remove it, then add it again: `claude plugin marketplace remove needythreads`, then `claude plugin marketplace add NeedyMindset/needythreads`. |
 | Typing `/plugin ...` opens a window and nothing installs | That is how the Claude Desktop app handles `/plugin`. Use the claude.ai steps (Customize > Plugins) or run `claude plugin ...` in a terminal. |
 | "PUBLORA_API_KEY not set" | Your `.env` file is missing or in the wrong folder. Put it in `~/.needythreads/.env` (your home folder), or run `python scripts/configure_env.py`. |
@@ -383,21 +391,27 @@ needythreads/
 
 ```python
 import sys; sys.path.insert(0, "path/to/needythreads")
-from lib import parse_threads_url, PubloraClient, publish
+from lib import parse_threads_url, PubloraClient, publish, render_approval_card, target_account, text_digest
 
 parsed = parse_threads_url("https://www.threads.net/@needymindsetshop/post/C8H9abcDEf_")
 print(parsed["handle"], parsed["post_id"])  # needymindsetshop C8H9abcDEf_
 
 # Write side (Publora) - a single post or a thread (long content auto-splits)
 client = PubloraClient()  # reads PUBLORA_API_KEY from env
+# Low level: applies NEITHER the text approval NOR the Threads checks.
 client.create_post(
     content="First post of the thread\n\n---\n\nSecond post\n\n---\n\nThird post",
     platforms=["threads-17841412345678"],
 )
 
-# Or use the high-level wrapper that handles manual / Publora / diy routing
-publish("thread", draft_text="...", target_url="https://www.threads.com/",
-        platforms=["threads-17841412345678"])
+# Or use the high-level wrapper (manual / Publora / diy routing). It requires the text approval:
+# without the card's fingerprint, or if the text changed since, it refuses to send.
+text = "First post\n\n---\n\nSecond post"
+print(render_approval_card(kind="thread", preview_text=text, account=target_account()))
+# ... the user reads the card and answers "draft" ...
+publish("thread", draft_text=text, target_url="https://www.threads.com/",
+        platforms=["threads-17841412345678"],
+        action="draft", approved_digest=text_digest(text))  # "schedule" / "now": add confirm_public=True
 ```
 
 ## URL handling

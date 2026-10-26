@@ -29,7 +29,7 @@ for reviewing an already-Threads draft (use `threads-humanizer`, plus
 
 ## How it works
 
-**Voice profile first (all drafts).** Look for the user's own profile at `~/.needythreads/voice-profile.md` (in their home folder) first, then at the blank template `../../references/voice-profile.md`. If one has `filled: yes`, load it and match the user's voice fingerprint, hard rules, and CTA/link style throughout. If neither is filled, mention once that `threads-humanizer --mode profile` can learn their voice from a few posts, and that `threads-post-writer` saves a quick profile in 2 minutes, then proceed with the generic voice rules.
+**Voice profile first (all drafts).** Look for the user's own profile at `~/.needythreads/voice-profile.md` (in their home folder) first, then at the blank template `../../references/voice-profile.md`. If one has `filled: yes`, load it and match the user's voice fingerprint, hard rules, and CTA/link style throughout. Lines marked `[à confirmer]` are not facts: ask before using them. If neither is filled, mention once that `threads-humanizer --mode profile` can learn their voice from a few posts, and that `threads-post-writer` saves a quick profile in 2 minutes, then proceed with the generic voice rules.
 
 **Story bank next.** Look for `~/.needythreads/story-bank.md` first, then the blank template `../../references/story-bank.md`. If one has `filled: yes`, load it and take every concrete detail (numbers, dates, named projects, positions) from there instead of asking mid-draft. **Never invent a figure, a date or a client name that is not in the bank or supplied by the user in this conversation.** If the bank has nothing that fits, ask the user, or say once that `threads-humanizer --mode interview` fills it in 20 to 40 minutes. A draft with a plausible invented number is worse than a draft with none: one is vague, the other is a retraction.
 
@@ -67,15 +67,8 @@ for reviewing an already-Threads draft (use `threads-humanizer`, plus
    Leave the rhythm alone (uniform rhythm wins on Threads; never insert a
    punch post for variance). Keep the user's real numbers and named entities
    from the source.
-9. **Approval card.** Show: source -> Threads mapping (what became what), the
-   container (single post or N-post thread with per-post char counts), formula
-   used, warmed-tone note, primary goal. Confirm any `---` breaks.
-10. **On approval.** Publish via `lib.publish(kind="post"` (single) or
-    `kind="thread"`, `draft_text=<approved>,
-    target_url="https://www.threads.com/", platforms=[<THREADS_PLATFORM_ID>],
-    scheduled_time=<iso_or_None>)`. The wrapper handles Publora / manual / diy
-    routing. Publora auto-splits an over-length draft into a connected thread at
-    paragraph then sentence boundaries.
+9. **Approval card.** Build it with `lib.render_approval_card(kind=..., preview_text=<full draft>, account=lib.target_account(), key_source=lib._env.env_source("PUBLORA_API_KEY"), warnings=[<one line per entry of lib._env.ignored_credentials()>])`: it carries the checks, the target account and the fingerprint of the exact text. Add the source -> Threads mapping (what became what), the container (single post or N-post thread with per-post char counts), formula used, warmed-tone note, primary goal. Confirm any `---` breaks. Stop and wait: "oui" approves the wording only.
+10. **Actions, each asked for separately.** A Publora draft only when the user says "brouillon": `lib.publish(kind="post"` (single) or `kind="thread"`, `draft_text=<approved>, target_url="https://www.threads.com/", action="draft", approved_digest=<fingerprint on the card>)`. Scheduling or publishing only on a request of their own, with `action="schedule"` and `scheduled_time=<iso>` or `action="now"`, plus `confirm_public=True`. Otherwise give the text to copy-paste. A changed text needs a new card. Publora auto-splits an over-length draft into a connected thread at paragraph then sentence boundaries.
 
 ## Native-fit rules (source -> Threads)
 

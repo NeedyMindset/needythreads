@@ -56,8 +56,12 @@ picks up there.
    person? Those are pre-tested.
 7. **Settle naming and limits explicitly.** Who and what can appear in public, who
    cannot, what stays out entirely. Ask; do not infer.
-8. **Write the bank.** Fill the sections, keep their phrasing verbatim where it is
-   vivid, set `filled: yes`, stamp the date, say which sections are still thin.
+8. **Write the bank, after showing it.** Show the user the full content first and
+   write the file only after a clear yes (saving is never a side effect of a
+   correction). Fill the sections, keep their phrasing verbatim where it is vivid,
+   tag every fact `[confirmé]` (they said it) or `[à confirmer]` (you inferred it
+   or it may have changed), give figures that change a source and a verification
+   date, set `filled: yes`, stamp the date, say which sections are still thin.
 9. **Show what it unlocks.** Name two or three specific posts the new material
    could produce, so the session ends with something rather than a filled form.
 

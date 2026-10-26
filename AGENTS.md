@@ -111,6 +111,16 @@ making changes. Conventions here are mandatory unless the user asks otherwise.
   `platforms: ["threads-<id>"]` (array of STRING ids), header `x-publora-key`.
   Threads `platformSettings.threads.replyControl` passes through
   `platform_settings`.
+- **The approval gate is code, not only prose.** `lib/approval.py` puts a fingerprint
+  of the exact text on the approval card; `publish()` refuses to send without that
+  `approved_digest` and refuses a text that changed after approval. Three actions:
+  `action="draft"` (default, nothing public), `"schedule"` and `"now"`, the last two
+  only with `confirm_public=True`. `lib/threads_rules.py` blocks a post over 500
+  characters or with more than one hashtag, and `publish()` checks that the key
+  manages the target platform id. `lib/_env.py` reads `~/.needythreads/.env` before
+  any `.env` in the working folder (enforced by `check_security_boundaries.py`).
+  A skill that sends a post must pass the fingerprint; `tests/test_skill_rules.py`
+  fails if it does not. Saving a profile needs a shown preview and a clear yes.
 - **Threads has no comment/reply/reaction endpoint on Publora**, and
   `create-post` cannot target another user's post. `kind="reply"` always routes
   to a manual copy-paste block.
@@ -150,6 +160,7 @@ python3 scripts/check_untrusted_rule.py  # the rule must sit in the skills, not 
 python3 scripts/check_text_encoding.py  # a bare read_text() is cp1252 on Windows, mojibake or a crash
 python3 scripts/check_security_boundaries.py  # .env may not name an executable; no authenticated redirects
 python3 scripts/check_mcp_mapping.py  # the connector path must produce the library's records, not a second shape
+python3 -m unittest discover -s tests  # key order, approval gate, Threads rules, consent text
 python3 -m json.tool .codex-plugin/plugin.json >/dev/null
 python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .claude-plugin/plugin.json >/dev/null

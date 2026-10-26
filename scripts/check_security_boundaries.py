@@ -15,10 +15,16 @@ These are enforced by this script so they stay closed.
    Authorization across hosts but not either of those, so a redirect hands the
    credential, and on POST the body, to whoever answered.
 
+4. **The user's own credentials file wins.** `~/.needythreads/.env` is read
+   before any .env found in the working folder, so a folder that arrives with a
+   .env of its own can never swap the key and send the user's drafts to someone
+   else's Publora account.
+
 Run from the repo root:
 
     python3 scripts/check_security_boundaries.py
 """
+import importlib.util
 import pathlib
 import re
 import sys
@@ -81,12 +87,26 @@ def main() -> int:
                     f"lib/{name}:{line}: an authenticated request without "
                     f"allow_redirects=False. A redirect would forward the credential.")
 
+    # Boundary 4: load lib/_env.py on its own (it only needs the standard library)
+    # and check that the user's file is the first place credentials are read from.
+    spec = importlib.util.spec_from_file_location("needythreads_env_check", ENV)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        candidates = module.env_candidates()
+        if not candidates or candidates[0] != module.user_env_path():
+            problems.append(
+                "lib/_env.py reads a .env from the working folder before "
+                "~/.needythreads/.env. A stray .env could then replace the user's key.")
+    except Exception as exc:  # a broken module is itself a boundary failure
+        problems.append(f"lib/_env.py could not be checked: {exc!r}")
+
     if problems:
         print("Security boundaries:\n" + "\n".join("  " + p for p in problems))
         return 1
 
-    print("OK: .env cannot name an executable, nothing loads it behind load_env, and no "
-          "authenticated request follows redirects.")
+    print("OK: .env cannot name an executable, nothing loads it behind load_env, the user's "
+          "own file is read first, and no authenticated request follows redirects.")
     return 0
 
 
