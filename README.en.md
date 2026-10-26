@@ -47,12 +47,14 @@ claude.ai stores a **copy** of the plugin when you add it. By default that copy 
 
 1. On https://claude.ai: **Customize** > **Plugins** > **+ Add** > **Manage marketplaces**
 2. On the `needythreads` row, open the **...** menu and click **Check for updates**. "Synced commit" changes when a new version is fetched. A notice only says that executable files may differ from the previous version.
-3. Check the version: **Customize** > **Plugins** > **Yours** > **Needythreads**. The page shows the number (for example `1.0.43`). If the plugin disappeared or is disabled, click **Add** on its page.
+3. Check the version **and the state**: **Customize** > **Plugins** > **Yours** > **Needythreads**. The page shows the number (for example `1.0.44`). **If the page shows an "Add" button, or the list says "Disabled", the plugin is no longer installed: click "Add".** This happened to us on 26 October 2026 after "Check for updates": the marketplace was up to date, but the plugin was no longer active and no conversation loaded it. You know it is active when the page shows the switch on and the message "installed and ready to use".
 4. Open a **new conversation**. Claude Desktop picks up the new copy within seconds or minutes; a conversation that is already open keeps the old one.
 
 **Automatic update (optional, unreliable in our test):** in the same **...** menu, the **Sync automatically** switch asks you to install the **Claude GitHub App** on the repository, with **read and write** access to the code, workflows, issues and pull requests of the chosen repositories. In our test on 26 October 2026, after a new commit on GitHub, "Synced commit" **did not change by itself**: we had to click **Check for updates**. We therefore do not recommend granting these permissions: the manual update is enough. If you already did, you can remove the app on GitHub (organization > **Settings** > **GitHub Apps** > **Claude** > **Uninstall**) and turn the switch off.
 
-Manual update tested on claude.ai on 26 October 2026 (going from v1.0.40 to v1.0.43). Menu labels above are translated from the French interface.
+Manual update tested on claude.ai on 26 October 2026 (going from v1.0.40 to v1.0.43).
+
+**Test the plugin:** open a new conversation from an **empty folder** with no `CLAUDE.md`. If the folder (or a parent folder) contains a `CLAUDE.md` or `AGENTS.md`, its rules take priority and can replace the plugin's first-use questions; the assistant may also read other files in the folder instead of the skills. With the plugin loaded, `needythreads:threads-post-writer` and the other skills appear in the list of available skills. Menu labels above are translated from the French interface.
 
 **Remove the plugin:** **Customize** > **Plugins** > **+ Add** > **Manage marketplaces** > **...** menu > **Delete**. This also deletes the plugin. Removing only the plugin leaves the marketplace registered, which reinstalls it at the old version.
 
@@ -334,6 +336,7 @@ Every skill follows these rules automatically:
 | Problem | Fix |
 |---|---|
 | Skills don't activate when I ask about Threads | Make sure it shows as added under Customize > Plugins in claude.ai (or was installed with `claude plugin install` or `codex plugin add`). Try a new conversation. |
+| No questions at start, or the answer talks about files that are not yours | Two possible causes: (1) the plugin is not active (page shows "Add" or "Disabled": click **Add**); (2) the conversation opens in a folder that contains a `CLAUDE.md` (yours or another project's) whose rules take priority over the plugin's. Open a new conversation from an empty folder. |
 | A documented feature is missing (for example the 5 first-use questions) or "This marketplace is already added" | You have a frozen copy of an old version. Use **Check for updates** in **Manage marketplaces** (see [Update the plugin](#update-the-plugin)), check the version number on the plugin page, then open a new conversation. |
 | "Failed to add marketplace ... its network source differs" | A marketplace named `needythreads` is already registered with a different source (a local folder, for example). Remove it, then add it again: `claude plugin marketplace remove needythreads`, then `claude plugin marketplace add NeedyMindset/needythreads`. |
 | Typing `/plugin ...` opens a window and nothing installs | That is how the Claude Desktop app handles `/plugin`. Use the claude.ai steps (Customize > Plugins) or run `claude plugin ...` in a terminal. |

@@ -32,6 +32,11 @@ making changes. Conventions here are mandatory unless the user asks otherwise.
      "Check for updates" in Customize > Plugins > Manage marketplaces after a push, then
      confirm the version on the plugin page. A user who sees an old version (no first-use
      questions) has a stale snapshot, not a broken install.
+     After the refresh, open the plugin page again: it can fall back to "Add" (not
+     installed), and then no conversation loads it. Click "Add". Test from an empty
+     folder OUTSIDE any tree that has its own CLAUDE.md, whose rules override the
+     plugin's first-use questions (2026-10-26: a test run inside needymindset-os loaded
+     that persona, never called the skills, and looked like a plugin bug).
   A tag alone does NOT update the README release badge. The shields.io badge
   reads from the Releases API, not from raw tags. Skipping step 2 leaves it stale.
 
