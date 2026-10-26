@@ -1,7 +1,7 @@
 {
   "name": "needythreads",
   "description": "8 skills Claude Code et Codex pour le marketing sur Threads (Meta) : rédaction de posts et de threads, humanizer avec audit avant publication, décorticage d'accroches virales, brouillons de réponses et de citations, optimisation de profil, adaptation de contenu, analyse d'audience et planning de contenu hebdomadaire. Publora est la couche de publication par défaut.",
-  "version": "1.0.43",
+  "version": "1.0.44",
   "author": {
     "name": "Olivier C.",
     "url": "https://github.com/NeedyMindset"

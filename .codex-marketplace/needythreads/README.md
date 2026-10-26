@@ -37,7 +37,24 @@ Le bon skill s'active automatiquement. Tu relis et tu valides ensuite.
 4. **Needythreads** apparaît dans la liste. Clique sur **Ajouter**. Un message confirme qu'il est installé et prêt à être utilisé
 5. Lance une nouvelle conversation et demande : « Écris un post Threads sur [sujet] ». Les skills ne se chargent que dans une nouvelle conversation.
 
-Un bandeau peut te demander d'accorder à la Claude GitHub App l'accès au dépôt. Tu peux l'ignorer : le plugin fonctionne sans, et cela ne sert qu'aux mises à jour automatiques.
+Un bandeau peut te demander d'accorder à la Claude GitHub App l'accès au dépôt. Tu peux l'ignorer : le plugin fonctionne sans, et cela ne sert qu'aux mises à jour automatiques (voir [Mettre à jour le plugin](#mettre-à-jour-le-plugin)).
+
+### Mettre à jour le plugin
+
+claude.ai enregistre une **copie** du plugin au moment où tu l'ajoutes. Par défaut, cette copie **ne se met pas à jour toute seule** : si une nouvelle version sort, tu gardes l'ancienne tant que tu ne la rafraîchis pas. Symptôme typique : il manque une fonction annoncée (par exemple les 5 questions de départ, présentes depuis la v1.0.42), et rajouter la marketplace répond « Cette marketplace est déjà ajoutée ».
+
+**Mise à jour manuelle (aucune autorisation à donner) :**
+
+1. Sur https://claude.ai : **Personnalisation** > **Plugins** > **+ Ajouter** > **Gérer les marketplaces**
+2. Sur la ligne `needythreads`, ouvre le menu **…** et clique sur **Rechercher des mises à jour**. « Commit synchronisé » change quand une nouvelle version est récupérée. Un avis indique seulement que les fichiers exécutables peuvent différer de la version précédente.
+3. Vérifie la version : **Personnalisation** > **Plugins** > **Les vôtres** > **Needythreads**. La fiche affiche le numéro (par exemple `1.0.43`). Si le plugin a disparu ou est désactivé, clique sur **Ajouter** dans sa fiche.
+4. Ouvre une **nouvelle conversation**. Claude Desktop récupère la nouvelle copie en quelques secondes ou minutes ; une conversation déjà ouverte garde l'ancienne.
+
+**Mise à jour automatique (facultatif) :** dans le même menu **…**, active **Synchroniser automatiquement**. claude.ai demande alors d'installer la **Claude GitHub App** sur le dépôt. Lis ce que tu accordes : cette application obtient la **lecture et l'écriture** sur le code, les workflows, les issues et les pull requests des dépôts choisis. Si tu l'acceptes, choisis **Only select repositories** et coche uniquement `NeedyMindset/needythreads`, puis clique sur **Terminer la connexion à GitHub**. Sans cette autorisation, la mise à jour manuelle ci-dessus reste disponible.
+
+Mise à jour manuelle testée sur claude.ai le 26 octobre 2026 (passage de la v1.0.40 à la v1.0.43).
+
+**Retirer le plugin :** **Personnalisation** > **Plugins** > **+ Ajouter** > **Gérer les marketplaces** > menu **…** > **Supprimer**. Cela supprime aussi le plugin. Retirer seulement le plugin laisse la marketplace enregistrée, qui le réinstalle dans l'ancienne version.
 
 Parcours d'installation testé sur claude.ai le 25 octobre 2026 (dernière version testée : v1.0.42).
 
@@ -318,6 +335,7 @@ Chaque skill suit automatiquement ces règles :
 | Problème | Solution |
 |---|---|
 | Les skills ne s'activent pas quand je parle de Threads | Vérifie qu'il apparaît comme ajouté dans Personnalisation > Plugins sur claude.ai (ou qu'il a été installé avec `claude plugin install` ou `codex plugin add`). Essaie une nouvelle conversation. |
+| Il manque une fonction annoncée (par exemple les 5 questions de départ) ou « Cette marketplace est déjà ajoutée » | Tu as une copie figée d'une ancienne version. Fais **Rechercher des mises à jour** dans **Gérer les marketplaces** (voir [Mettre à jour le plugin](#mettre-à-jour-le-plugin)), vérifie le numéro de version dans la fiche du plugin, puis ouvre une nouvelle conversation. |
 | « Failed to add marketplace ... its network source differs » | Une marketplace nommée `needythreads` est déjà enregistrée avec une autre source (un dossier local, par exemple). Supprime-la puis ajoute-la à nouveau : `claude plugin marketplace remove needythreads`, puis `claude plugin marketplace add NeedyMindset/needythreads`. |
 | Taper `/plugin ...` ouvre une fenêtre et rien ne s'installe | C'est le comportement de l'application Claude Desktop pour `/plugin`. Utilise les étapes claude.ai (Personnalisation > Plugins) ou lance `claude plugin ...` dans un terminal. |
 | "PUBLORA_API_KEY not set" | Ton fichier `.env` est absent ou au mauvais endroit. Mets-le dans `~/.needythreads/.env` (ton dossier personnel) ou lance `python scripts/configure_env.py`. |

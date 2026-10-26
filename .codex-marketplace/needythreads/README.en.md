@@ -37,7 +37,24 @@ The right skill activates automatically. Then you review and approve.
 4. **Needythreads** shows up in the list. Click **Add**. A message confirms it is installed and ready to use
 5. Start a new conversation and ask: "Write a Threads post about [topic]". The skills only load in a new conversation.
 
-A banner may ask you to give the Claude GitHub App access to the repository. You can ignore it: the plugin works without it, and it only matters for automatic updates.
+A banner may ask you to give the Claude GitHub App access to the repository. You can ignore it: the plugin works without it, and it only matters for automatic updates (see [Update the plugin](#update-the-plugin)).
+
+### Update the plugin
+
+claude.ai stores a **copy** of the plugin when you add it. By default that copy **does not update by itself**: when a new version is released, you keep the old one until you refresh it. Typical symptom: a documented feature is missing (for example the 5 first-use questions, present since v1.0.42), and adding the marketplace again answers "This marketplace is already added".
+
+**Manual update (no permission to grant):**
+
+1. On https://claude.ai: **Customize** > **Plugins** > **+ Add** > **Manage marketplaces**
+2. On the `needythreads` row, open the **...** menu and click **Check for updates**. "Synced commit" changes when a new version is fetched. A notice only says that executable files may differ from the previous version.
+3. Check the version: **Customize** > **Plugins** > **Yours** > **Needythreads**. The page shows the number (for example `1.0.43`). If the plugin disappeared or is disabled, click **Add** on its page.
+4. Open a **new conversation**. Claude Desktop picks up the new copy within seconds or minutes; a conversation that is already open keeps the old one.
+
+**Automatic update (optional):** in the same **...** menu, turn on **Sync automatically**. claude.ai then asks you to install the **Claude GitHub App** on the repository. Read what you grant: this app gets **read and write** access to the code, workflows, issues and pull requests of the chosen repositories. If you accept, pick **Only select repositories** and tick only `NeedyMindset/needythreads`, then click **Finish connecting to GitHub**. Without this permission, the manual update above stays available.
+
+Manual update tested on claude.ai on 26 October 2026 (going from v1.0.40 to v1.0.43). Menu labels above are translated from the French interface.
+
+**Remove the plugin:** **Customize** > **Plugins** > **+ Add** > **Manage marketplaces** > **...** menu > **Delete**. This also deletes the plugin. Removing only the plugin leaves the marketplace registered, which reinstalls it at the old version.
 
 Install flow tested on claude.ai on 25 October 2026 (latest tested release: v1.0.42).
 
@@ -317,6 +334,7 @@ Every skill follows these rules automatically:
 | Problem | Fix |
 |---|---|
 | Skills don't activate when I ask about Threads | Make sure it shows as added under Customize > Plugins in claude.ai (or was installed with `claude plugin install` or `codex plugin add`). Try a new conversation. |
+| A documented feature is missing (for example the 5 first-use questions) or "This marketplace is already added" | You have a frozen copy of an old version. Use **Check for updates** in **Manage marketplaces** (see [Update the plugin](#update-the-plugin)), check the version number on the plugin page, then open a new conversation. |
 | "Failed to add marketplace ... its network source differs" | A marketplace named `needythreads` is already registered with a different source (a local folder, for example). Remove it, then add it again: `claude plugin marketplace remove needythreads`, then `claude plugin marketplace add NeedyMindset/needythreads`. |
 | Typing `/plugin ...` opens a window and nothing installs | That is how the Claude Desktop app handles `/plugin`. Use the claude.ai steps (Customize > Plugins) or run `claude plugin ...` in a terminal. |
 | "PUBLORA_API_KEY not set" | Your `.env` file is missing or in the wrong folder. Put it in `~/.needythreads/.env` (your home folder), or run `python scripts/configure_env.py`. |
