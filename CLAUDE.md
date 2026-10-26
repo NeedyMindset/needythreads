@@ -27,11 +27,12 @@ otherwise.
 - After bumping, two steps are required:
   1. Tag the commit: `git tag -a v<X.Y.Z> -m "..."` + `git push origin v<X.Y.Z>`
   2. **Publish a GitHub Release** for the tag: `gh release create v<X.Y.Z> --title "v<X.Y.Z>" --notes "<changelog>" --latest`
-  3. **Refresh the claude.ai copy.** claude.ai keeps a frozen snapshot of the marketplace
-     unless "Sync automatically" is on (it needs the Claude GitHub App). Without it, a
-     push reaches nobody: click "Check for updates" in Customize > Plugins > Manage
-     marketplaces, then confirm the version on the plugin page. A user who sees an old
-     version (no first-use questions) has a stale snapshot, not a broken install.
+  3. **Refresh the claude.ai copy.** claude.ai keeps a frozen snapshot of the marketplace.
+     "Sync automatically" (it needs the Claude GitHub App, read/write on the repo) did
+     NOT pick up a new commit on its own in our 2026-10-26 test, so always click
+     "Check for updates" in Customize > Plugins > Manage marketplaces after a push, then
+     confirm the version on the plugin page. A user who sees an old version (no first-use
+     questions) has a stale snapshot, not a broken install.
   A tag alone does NOT update the README release badge. The shields.io badge
   reads from the Releases API, not from raw tags. Skipping step 2 leaves it stale.
 
