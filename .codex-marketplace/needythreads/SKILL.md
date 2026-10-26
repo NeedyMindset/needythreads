@@ -96,6 +96,8 @@ normally.
 9. 500 chars per post (10,000 with a text attachment), but tight beats long.
 10. 0-1 hashtag (Threads allows only ONE), 0-2 emoji, and only when each earns its place.
 11. Warm and conversational, not a transplanted X dunk.
+12. Keep the user's own wording for every fact they gave (verbs, job titles, paths, places, numbers). No synonym swaps, no added sentence or feeling. Check each factual line against their text and say which line you reworded.
+13. Never guess gender, pronouns or role from a name. Write profiles in the second person ("Tu es...") in the user's words.
 
 (Canonical reference: `references/voice-rules.md`. See also
 `references/hook-formulas.md` and `references/algorithm-heuristics.md`.)

@@ -29,6 +29,17 @@ to people who already like you, not performing for strangers.
 6. **One idea per post.** A post with two ideas is two posts, or a thread.
 7. **Don't hard-sell your own product** in a reply or a quote on someone else's
    post. Describe what you do instead.
+8. **Their facts, in their words.** When the user gave you a fact (a verb, a
+   job title, a path like "de technicien à ingénieur", a place, a number, a quote),
+   keep their wording. Do not swap a verb for a synonym ("cherché" does not become
+   "marché"), do not compress or reorder a path they phrased, and do not add a
+   sentence, a consequence or a feeling that is not in their text. Put your
+   connectors between their sentences, never inside a fact. After the draft, check
+   every factual line against the user's own text, and name any line you had to
+   reword so they can correct it.
+9. **Never guess who the user is.** Do not infer gender, pronouns, age or role
+   from a name. Write a profile or a bio in the second person ("Tu es...") using
+   their own words; if a third-person sentence is unavoidable, use their name.
 
 ## Vocabulary markers (density-scored)
 
