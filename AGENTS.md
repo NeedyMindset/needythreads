@@ -124,7 +124,7 @@ making changes. Conventions here are mandatory unless the user asks otherwise.
   A skill that sends a post must pass the fingerprint; `tests/test_skill_rules.py`
   fails if it does not. Saving a profile needs a shown preview and a clear yes.
   Skills never create draft files and write only the two profile files into
-  `~/.needythreads` (the key folder); text corrections are limited to listed mistakes.
+  `~/.needythreads` (the key folder); text corrections are limited to listed mistakes. Fields still empty or `(à compléter)` are asked in one grouped message; « passer » writes `(passé volontairement)`.
 - **Threads has no comment/reply/reaction endpoint on Publora**, and
   `create-post` cannot target another user's post. `kind="reply"` always routes
   to a manual copy-paste block.

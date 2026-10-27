@@ -133,6 +133,15 @@ class PublicationTests(unittest.TestCase):
     def test_an_existing_profile_is_not_offered_for_saving_again(self):
         self.assertIn("If a profile with `filled: yes` already exists, do not ask", text("skills/threads-post-writer/SKILL.md"))
 
+    def test_open_profile_fields_are_asked_not_forgotten(self):
+        body = text("skills/threads-post-writer/SKILL.md")
+        self.assertIn("Open fields are questions you owe the user", body)
+        for field in ("words never used", "off-limits topics", "main link", "brand colour in hex", "logo file", "overlay position"):
+            self.assertIn(field, body, field)
+        self.assertIn("(passé volontairement)", body)
+        self.assertIn("never skip a group silently", body)
+        self.assertIn("Gap check before saving", text("skills/threads-humanizer/sub-skills/voice-profile.md"))
+
     def test_skill_descriptions_have_no_dashes(self):
         for path in [ROOT / "SKILL.md", *sorted((ROOT / "skills").glob("*/SKILL.md"))]:
             for line in path.read_text(encoding="utf-8").splitlines():
