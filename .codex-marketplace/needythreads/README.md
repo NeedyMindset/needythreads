@@ -48,7 +48,16 @@ claude.ai enregistre une **copie** du plugin au moment où tu l'ajoutes. Par dé
 1. Sur https://claude.ai : **Personnalisation** > **Plugins** > **+ Ajouter** > **Gérer les marketplaces**
 2. Sur la ligne `needythreads`, ouvre le menu **…** et clique sur **Rechercher des mises à jour**. « Commit synchronisé » change quand une nouvelle version est récupérée. Un avis indique seulement que les fichiers exécutables peuvent différer de la version précédente.
 3. Vérifie la version **et l'état** : **Personnalisation** > **Plugins** > **Les vôtres** > **Needythreads**. La fiche affiche le numéro (par exemple `1.0.44`). **Si la fiche montre un bouton « Ajouter », ou si la liste indique « Désactivé », le plugin n'est plus installé : clique sur « Ajouter ».** Cela nous est arrivé le 26 octobre 2026 après « Rechercher des mises à jour » : la marketplace était à jour, mais le plugin n'était plus actif et aucune conversation ne le chargeait. Tu sais qu'il est actif quand la fiche affiche l'interrupteur allumé et le message « installé et prêt à être utilisé ».
-4. Ouvre une **nouvelle conversation**. Claude Desktop récupère la nouvelle copie en quelques secondes ou minutes ; une conversation déjà ouverte garde l'ancienne.
+4. Ouvre une **nouvelle conversation**. Une conversation déjà ouverte garde l'ancienne copie.
+5. **Vérifie la copie de Claude Desktop.** Claude Desktop garde sa propre copie locale, qui peut rester en retard sur claude.ai : le 27 octobre 2026, la fiche affichait `1.0.49` et la copie de Desktop était encore en `1.0.48` une demi-heure plus tard, et une conversation neuve a donc tourné avec l'ancienne version. Sous Windows, ce script affiche la version que Desktop utilise :
+
+```powershell
+Get-ChildItem "$env:LOCALAPPDATA\Claude-Data" -Recurse -Filter plugin.json -ErrorAction SilentlyContinue |
+  ForEach-Object { $j = Get-Content $_.FullName -Raw | ConvertFrom-Json; if ($j.name -eq 'needythreads') { $j.version } } |
+  Select-Object -Unique
+```
+
+   Si le numéro n'est pas le bon, la conversation utilise l'ancienne version : attends, puis recontrôle avant de tester.
 
 **Mise à jour automatique (facultatif, non fiable lors de notre test) :** dans le même menu **…**, l'interrupteur **Synchroniser automatiquement** demande d'installer la **Claude GitHub App** sur le dépôt, avec la **lecture et l'écriture** sur le code, les workflows, les issues et les pull requests des dépôts choisis. Lors de notre test du 26 octobre 2026, après un nouveau commit sur GitHub, « Commit synchronisé » **n'a pas changé tout seul** : il a fallu cliquer sur **Rechercher des mises à jour**. Nous ne recommandons donc pas d'accorder ces droits : la mise à jour manuelle suffit. Si tu l'as déjà fait, tu peux retirer l'application sur GitHub (organisation > **Settings** > **GitHub Apps** > **Claude** > **Uninstall**) et éteindre l'interrupteur.
 
@@ -292,7 +301,7 @@ pip install requests python-dotenv
 2. **Brouillon Publora.** Seulement si tu dis « brouillon ». Rien n'est public.
 3. **Programmer ou publier.** Seulement si tu le demandes dans un message à part (« programme demain à 19 h », « publie maintenant »).
 
-La carte porte une **empreinte** du texte : si le texte change après ta validation, l'envoi est refusé et une nouvelle carte est demandée. Avant tout envoi, le code contrôle aussi 500 caractères par post, un hashtag maximum, et que ta clé Publora gère bien le compte Threads cible.
+La carte porte une **empreinte** du texte : si le texte change après ta validation, l'envoi est refusé et une nouvelle carte est demandée. Avant tout envoi, le code contrôle aussi 500 caractères par post, un hashtag maximum, et que ta clé Publora gère bien le compte Threads cible. Un post seul de moins de 300 caractères reçoit un avertissement sur la carte : la cible est de 350 à 500 caractères, construits avec les détails vécus de ta banque d'histoires, jamais avec une phrase inventée pour remplir.
 
 **Où sont lues tes clés.** D'abord les variables d'environnement, puis `~/.needythreads/.env`, puis un `.env` du dossier de travail. Un `.env` trouvé dans un dossier téléchargé ne remplace jamais ta clé : s'il en définit une autre, elle est ignorée et signalée sur la carte. Le dossier `~/.needythreads` contient ta clé : n'y ouvre pas de conversation, et le plugin n'y écrit que `voice-profile.md` et `story-bank.md` (après ton accord), jamais de fichier de brouillon. Un « brouillon » est un brouillon Publora ; si Publora est injoignable, tu reçois le texte à copier-coller. Les corrections se limitent aux fautes d'orthographe ou d'accord, listées une par une (« avant → après ») ; tout autre changement est une suggestion.
 

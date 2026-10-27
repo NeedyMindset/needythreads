@@ -97,11 +97,18 @@ dead phrases or performed sincerity, not vocabulary:
 
 ## Length
 
-- **Per post: 500 characters.** Write to land the whole idea inside it. A post
-  that needs 540 chars needs an edit, or it should become a thread.
+- **Per post: 500 characters is the ceiling.** Write to land the whole idea inside it.
+  A post that needs 540 chars needs an edit, or it should become a thread.
+- **A single post should use the room: aim for 350 to 500 characters.** A first
+  line that stops the scroll, then two or three beats taken from the user's own
+  story bank (the scene, the number, the turn), then the ask. Under 300 characters
+  is almost always an idea left half told. Never reach the length with an invented
+  sentence, a filler line or a made-up fact: when the bank has no material, ask the
+  user one question (which scene, which number) instead of padding. A user who sets
+  another target in their profile ("Longueur cible") overrides this one.
 - **Text attachment: up to 10,000 chars** when you attach the longer-form text,
-  but a wall of text still underperforms a tight one. Length is a ceiling, not a
-  target. Reach for a thread before a 2,000-char monolith.
+  but a wall of text still underperforms a tight one. For an attachment, length is a
+  ceiling, not a target. Reach for a thread before a 2,000-char monolith.
 - **Thread posts: keep each one able to stand alone.** A reader who lands on
   post 4 from a repost should still get something.
 

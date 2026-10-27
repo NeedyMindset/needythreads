@@ -105,7 +105,7 @@ how the thread will land before approving.
 4. **Draft.** Fill the skeleton in the user's voice. Respect the 2026 Threads
    rules:
    - First line carries the whole load (the feed truncates with "more").
-   - Under 500 chars per post (10,000 only if a text attachment is in play).
+   - Under 500 chars per post (10,000 only if a text attachment is in play). A single post aims for 350 to 500: after the hook, add two or three beats from the story bank (the scene, the number, the turn). Under 300 is a warning on the card. If the bank cannot fill it, ask one question; never pad with an invented line.
    - One idea per post. Line breaks as beats.
    - 0-1 hashtag at the end (Threads allows only one), 0-2 emoji, none on a
      serious take.

@@ -110,6 +110,14 @@ class PublicationTests(unittest.TestCase):
             for name in pattern.findall(path.read_text(encoding="utf-8")):
                 self.assertIn(name, allowed, f"{path.name} names ~/.needythreads/{name}")
 
+    def test_single_posts_use_the_room_without_padding(self):
+        rules = text("references/voice-rules.md")
+        self.assertIn("aim for 350 to 500 characters", rules)
+        self.assertIn("instead of padding", rules)
+        self.assertIn("350 to 500", text("SKILL.md"))
+        self.assertIn("never pad with an invented line", text("skills/threads-post-writer/SKILL.md"))
+        self.assertIn("350 à 500", text("references/voice-profile.md"))
+
     def test_skill_descriptions_have_no_dashes(self):
         for path in [ROOT / "SKILL.md", *sorted((ROOT / "skills").glob("*/SKILL.md"))]:
             for line in path.read_text(encoding="utf-8").splitlines():

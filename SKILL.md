@@ -97,7 +97,7 @@ normally.
 6. Specific numbers beat adjectives. 2.4x beats "way better".
 7. One idea per post. Two ideas means two posts, or a thread.
 8. The first line carries everything. The feed truncates long posts with a "more" cut.
-9. 500 chars per post (10,000 with a text attachment), but tight beats long.
+9. 500 chars per post (10,000 with a text attachment). A single post aims for 350 to 500: use the room for real details from the user's story bank, never filler or invented lines. Ask for the missing detail instead of padding.
 10. 0-1 hashtag (Threads allows only ONE), 0-2 emoji, and only when each earns its place.
 11. Warm and conversational, not a transplanted X dunk.
 12. Keep the user's own wording for every fact they gave (verbs, job titles, paths, places, numbers). No synonym swaps, no added sentence or feeling. Check each factual line against their text and say which line you reworded.

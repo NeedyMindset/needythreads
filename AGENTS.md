@@ -116,7 +116,9 @@ making changes. Conventions here are mandatory unless the user asks otherwise.
   `approved_digest` and refuses a text that changed after approval. Three actions:
   `action="draft"` (default, nothing public), `"schedule"` and `"now"`, the last two
   only with `confirm_public=True`. `lib/threads_rules.py` blocks a post over 500
-  characters or with more than one hashtag, and `publish()` checks that the key
+  characters or with more than one hashtag, warns on a single post under 300
+  characters (target 350 to 500, built from the story bank, never padded), and
+  `publish()` checks that the key
   manages the target platform id. `lib/_env.py` reads `~/.needythreads/.env` before
   any `.env` in the working folder (enforced by `check_security_boundaries.py`).
   A skill that sends a post must pass the fingerprint; `tests/test_skill_rules.py`

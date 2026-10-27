@@ -48,7 +48,16 @@ claude.ai stores a **copy** of the plugin when you add it. By default that copy 
 1. On https://claude.ai: **Customize** > **Plugins** > **+ Add** > **Manage marketplaces**
 2. On the `needythreads` row, open the **...** menu and click **Check for updates**. "Synced commit" changes when a new version is fetched. A notice only says that executable files may differ from the previous version.
 3. Check the version **and the state**: **Customize** > **Plugins** > **Yours** > **Needythreads**. The page shows the number (for example `1.0.44`). **If the page shows an "Add" button, or the list says "Disabled", the plugin is no longer installed: click "Add".** This happened to us on 26 October 2026 after "Check for updates": the marketplace was up to date, but the plugin was no longer active and no conversation loaded it. You know it is active when the page shows the switch on and the message "installed and ready to use".
-4. Open a **new conversation**. Claude Desktop picks up the new copy within seconds or minutes; a conversation that is already open keeps the old one.
+4. Open a **new conversation**. A conversation that is already open keeps the old copy.
+5. **Check Claude Desktop's copy.** Claude Desktop keeps its own local copy, which can lag behind claude.ai: on 27 October 2026 the plugin page showed `1.0.49` while Desktop's copy was still `1.0.48` half an hour later, so a fresh conversation ran the old version. On Windows, this script prints the version Desktop is using:
+
+```powershell
+Get-ChildItem "$env:LOCALAPPDATA\Claude-Data" -Recurse -Filter plugin.json -ErrorAction SilentlyContinue |
+  ForEach-Object { $j = Get-Content $_.FullName -Raw | ConvertFrom-Json; if ($j.name -eq 'needythreads') { $j.version } } |
+  Select-Object -Unique
+```
+
+   If the number is not the one you expect, the conversation is running the old version: wait, then check again before testing.
 
 **Automatic update (optional, unreliable in our test):** in the same **...** menu, the **Sync automatically** switch asks you to install the **Claude GitHub App** on the repository, with **read and write** access to the code, workflows, issues and pull requests of the chosen repositories. In our test on 26 October 2026, after a new commit on GitHub, "Synced commit" **did not change by itself**: we had to click **Check for updates**. We therefore do not recommend granting these permissions: the manual update is enough. If you already did, you can remove the app on GitHub (organization > **Settings** > **GitHub Apps** > **Claude** > **Uninstall**) and turn the switch off.
 
@@ -292,7 +301,7 @@ pip install requests python-dotenv
 2. **Publora draft.** Only if you say "draft". Nothing becomes public.
 3. **Schedule or publish.** Only if you ask for it in a message of its own ("schedule tomorrow at 7 pm", "publish now").
 
-The card carries a **fingerprint** of the text: if the text changes after you approved it, sending is refused and a new card is required. Before anything is sent, the code also checks 500 characters per post, one hashtag at most, and that your Publora key really manages the target Threads account.
+The card carries a **fingerprint** of the text: if the text changes after you approved it, sending is refused and a new card is required. Before anything is sent, the code also checks 500 characters per post, one hashtag at most, and that your Publora key really manages the target Threads account. A single post under 300 characters gets a warning on the card: the target is 350 to 500 characters, built from the real details in your story bank, never from a sentence invented to fill the space.
 
 **Where your keys are read from.** Environment variables first, then `~/.needythreads/.env`, then a `.env` in the working folder. A `.env` found in a downloaded folder never replaces your key: if it defines another one, it is ignored and flagged on the card. The `~/.needythreads` folder holds your key: do not open a conversation there, and the plugin writes only `voice-profile.md` and `story-bank.md` into it (after your approval), never a draft file. A "draft" is a Publora draft; if Publora cannot be reached you get the text to copy-paste. Corrections are limited to spelling or agreement mistakes, listed one by one ("before -> after"); any other change is a suggestion.
 

@@ -6,7 +6,8 @@ the result and `publish()` refuses a draft that breaks a hard limit.
 
 Hard limits (error): a post over 500 characters, more than one hashtag in a
 post, an empty draft. Style signals (warn): more than one em dash, a link in the
-first post, more than two emoji.
+first post, more than two emoji, a single post under 300 characters (the room is
+there to use: 350 to 500 is the target).
 """
 from __future__ import annotations
 
@@ -17,6 +18,7 @@ MAX_POST_CHARS = 500
 MAX_HASHTAGS = 1
 MAX_EM_DASHES = 1
 MAX_EMOJI = 2
+MIN_SINGLE_POST_CHARS = 300
 
 _HASHTAG = re.compile(r"(?<!\w)#\w+", re.UNICODE)
 _URL = re.compile(r"https?://\S+|www\.\S+", re.IGNORECASE)
@@ -88,6 +90,13 @@ def check_draft(text: str, kind: str = "post") -> list[Issue]:
             issues.append(Issue(
                 "warn", "emoji", number,
                 f"{len(emoji)} emoji : deux au maximum, et seulement s'ils servent.",
+            ))
+        if kind == "post" and len(posts) == 1 and len(post) < MIN_SINGLE_POST_CHARS:
+            issues.append(Issue(
+                "warn", "short_post", 1,
+                f"{len(post)} caractères : il reste de la place (cible 350 à 500). "
+                "Ajoute un détail vécu de ta banque d'histoires, ou dis-moi lequel ajouter ; "
+                "je n'invente rien pour remplir.",
             ))
         if number == 1 and _URL.search(post):
             issues.append(Issue(

@@ -29,7 +29,7 @@ Ce fichier dit **comment tu écris** : voix, audience, règles, appels à l'acti
 - Mots et expressions que tu utilises souvent :
 - Mots et expressions que tu n'utilises JAMAIS :
 - Emoji :
-- Format (Threads) : 500 caractères par post ; ton chaleureux et conversationnel ; un seul hashtag maximum
+- Format (Threads) : 500 caractères maximum par post ; longueur cible pour un post seul : 350 à 500 caractères (change ce chiffre si tu préfères plus court) ; ton chaleureux et conversationnel ; un seul hashtag maximum
 - Signature (une seule phrase de clôture ; si tu en as plusieurs, dis laquelle sert pour quel type de post) :
 
 ## 2. Qui tu es et pour qui tu écris (Who you are)
