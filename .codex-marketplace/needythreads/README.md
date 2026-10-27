@@ -294,7 +294,7 @@ pip install requests python-dotenv
 
 La carte porte une **empreinte** du texte : si le texte change après ta validation, l'envoi est refusé et une nouvelle carte est demandée. Avant tout envoi, le code contrôle aussi 500 caractères par post, un hashtag maximum, et que ta clé Publora gère bien le compte Threads cible.
 
-**Où sont lues tes clés.** D'abord les variables d'environnement, puis `~/.needythreads/.env`, puis un `.env` du dossier de travail. Un `.env` trouvé dans un dossier téléchargé ne remplace jamais ta clé : s'il en définit une autre, elle est ignorée et signalée sur la carte.
+**Où sont lues tes clés.** D'abord les variables d'environnement, puis `~/.needythreads/.env`, puis un `.env` du dossier de travail. Un `.env` trouvé dans un dossier téléchargé ne remplace jamais ta clé : s'il en définit une autre, elle est ignorée et signalée sur la carte. Le dossier `~/.needythreads` contient ta clé : n'y ouvre pas de conversation, et le plugin n'y écrit que `voice-profile.md` et `story-bank.md` (après ton accord), jamais de fichier de brouillon. Un « brouillon » est un brouillon Publora ; si Publora est injoignable, tu reçois le texte à copier-coller. Les corrections se limitent aux fautes d'orthographe ou d'accord, listées une par une (« avant → après ») ; tout autre changement est une suggestion.
 
 > **À propos des réponses :** une réponse au post d'un autre utilisateur est un post séparé que le `create-post` de Publora ne peut pas cibler, donc le Reply Drafter renvoie toujours son brouillon sous forme de bloc à copier-coller que tu publies toi-même. Les posts uniques et tes propres threads sont publiés automatiquement.
 

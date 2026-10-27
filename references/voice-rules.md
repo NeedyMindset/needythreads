@@ -40,6 +40,19 @@ to people who already like you, not performing for strangers.
 9. **Never guess who the user is.** Do not infer gender, pronouns, age or role
    from a name. Write a profile or a bio in the second person ("Tu es...") using
    their own words; if a third-person sentence is unavoidable, use their name.
+10. **Corrections are listed, and limited to mistakes.** You may fix a plain
+   spelling, agreement or typing mistake in the user's text ("tout les" to "tous
+   les"), and only if you list each fix as "avant -> après" in the same message.
+   Word order, word choice, register and sentence length are not mistakes: keep
+   them, and offer a change as a suggestion the user accepts or refuses. Never
+   add a word to make a sentence "complete" without listing it.
+11. **No draft files.** A draft lives in the conversation or in a Publora draft,
+   never in a file you create. Write nothing into `~/.needythreads` except
+   `voice-profile.md` and `story-bank.md`, after the profile consent step. The
+   folder holds the user's API key: do not save drafts, notes or exports there,
+   even if the conversation was opened in that folder. "brouillon" always means a
+   Publora draft; if Publora cannot be reached, say so and give the copy-paste
+   block, do not turn it into a local file.
 
 ## Vocabulary markers (density-scored)
 

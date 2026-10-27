@@ -129,6 +129,8 @@ otherwise.
   any `.env` in the working folder (enforced by `check_security_boundaries.py`).
   A skill that sends a post must pass the fingerprint; `tests/test_skill_rules.py`
   fails if it does not. Saving a profile needs a shown preview and a clear yes.
+  Skills never create draft files and write only the two profile files into
+  `~/.needythreads` (the key folder); text corrections are limited to listed mistakes.
 - **Threads has no comment/reply/reaction endpoint on Publora** (those are
   LinkedIn only), and `create-post` cannot target another user's post. So
   `kind="reply"` always routes to a manual copy-paste block in

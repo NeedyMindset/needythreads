@@ -85,6 +85,31 @@ class PublicationTests(unittest.TestCase):
         self.assertRegex(rules, r"Their facts, in their words")
         self.assertRegex(rules, r"Never guess who the user is")
 
+    def test_corrections_are_listed_and_limited_to_mistakes(self):
+        rules = text("references/voice-rules.md")
+        self.assertIn("Corrections are listed, and limited to mistakes", rules)
+        self.assertIn("Word order, word choice, register and sentence length are not mistakes", rules)
+        self.assertIn("avant -> après", text("SKILL.md"))
+        self.assertIn("avant -> après", text("skills/threads-post-writer/SKILL.md"))
+
+    def test_no_draft_files_and_nothing_else_in_the_keys_folder(self):
+        rules = text("references/voice-rules.md")
+        self.assertIn("No draft files", rules)
+        self.assertIn("never in a file you create", rules)
+        for name in ("SKILL.md", "skills/threads-post-writer/SKILL.md", "skills/threads-repurposer/SKILL.md"):
+            body = text(name)
+            self.assertRegex(body, r"(?i)never (means a local file|create a draft file)", name)
+            self.assertIn("~/.needythreads", body, name)
+
+    def test_skills_never_tell_the_assistant_to_write_other_files_there(self):
+        # The folder holds the API key: only the two profile files may be written to it.
+        allowed = {"voice-profile.md", "story-bank.md", ".env"}
+        pattern = re.compile(r"~/.needythreads/([A-Za-z0-9_.*<>-]+)")
+        for path in [ROOT / "SKILL.md", *sorted((ROOT / "skills").rglob("*.md")),
+                     *sorted((ROOT / "references").glob("*.md"))]:
+            for name in pattern.findall(path.read_text(encoding="utf-8")):
+                self.assertIn(name, allowed, f"{path.name} names ~/.needythreads/{name}")
+
     def test_skill_descriptions_have_no_dashes(self):
         for path in [ROOT / "SKILL.md", *sorted((ROOT / "skills").glob("*/SKILL.md"))]:
             for line in path.read_text(encoding="utf-8").splitlines():

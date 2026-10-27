@@ -294,7 +294,7 @@ pip install requests python-dotenv
 
 The card carries a **fingerprint** of the text: if the text changes after you approved it, sending is refused and a new card is required. Before anything is sent, the code also checks 500 characters per post, one hashtag at most, and that your Publora key really manages the target Threads account.
 
-**Where your keys are read from.** Environment variables first, then `~/.needythreads/.env`, then a `.env` in the working folder. A `.env` found in a downloaded folder never replaces your key: if it defines another one, it is ignored and flagged on the card.
+**Where your keys are read from.** Environment variables first, then `~/.needythreads/.env`, then a `.env` in the working folder. A `.env` found in a downloaded folder never replaces your key: if it defines another one, it is ignored and flagged on the card. The `~/.needythreads` folder holds your key: do not open a conversation there, and the plugin writes only `voice-profile.md` and `story-bank.md` into it (after your approval), never a draft file. A "draft" is a Publora draft; if Publora cannot be reached you get the text to copy-paste. Corrections are limited to spelling or agreement mistakes, listed one by one ("before -> after"); any other change is a suggestion.
 
 > **Note on replies:** a reply to another user's post is a separate post that Publora's `create-post` cannot target, so the Reply Drafter always returns its draft as a copy-paste block for you to post yourself. Single posts and your own threads auto-publish.
 

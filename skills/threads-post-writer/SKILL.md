@@ -129,6 +129,8 @@ how the thread will land before approving.
    - **Programmer ou publier:** only when the user asks for it in a message of their own ("programme demain à 19 h", "publie maintenant"). Call the same function with `action="schedule"` and `scheduled_time=<iso>`, or `action="now"`, and `confirm_public=True`.
    - **Copier-coller:** give the text and stop.
 
+   "brouillon" never means a local file: do not create `brouillon-*.md` or any draft file, and write nothing into `~/.needythreads` except the two profile files after their consent step. If Publora cannot be reached, say so and fall back to copy-paste. When you correct the user's text, change only plain spelling or agreement mistakes and list each one as "avant -> après" next to the card; any other change is a suggestion.
+
    If the text changes after approval, rebuild the card: the old fingerprint is refused. If `publish` raises `ApprovalError` or `ThreadsRuleError`, show its message, send nothing and fix the cause. The wrapper handles Publora / manual / diy routing, and a reply or a quote is always a copy-paste block. If the content runs long, Publora auto-splits it into a connected thread.
 
 ## Hard rules

@@ -102,6 +102,8 @@ normally.
 11. Warm and conversational, not a transplanted X dunk.
 12. Keep the user's own wording for every fact they gave (verbs, job titles, paths, places, numbers). No synonym swaps, no added sentence or feeling. Check each factual line against their text and say which line you reworded.
 13. Never guess gender, pronouns or role from a name. Write profiles in the second person ("Tu es...") in the user's words.
+14. Fix only plain spelling or agreement mistakes in the user's text, and list each one as "avant -> après" in the same message. Word order and word choice stay as written; propose any other change as a suggestion.
+15. Never create a draft file. A draft lives in the conversation or in a Publora draft. Write nothing into `~/.needythreads` except the two profile files after the consent step: that folder holds the API key.
 
 (Canonical reference: `references/voice-rules.md`. See also
 `references/hook-formulas.md` and `references/algorithm-heuristics.md`.)
