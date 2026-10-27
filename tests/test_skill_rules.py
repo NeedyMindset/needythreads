@@ -118,6 +118,21 @@ class PublicationTests(unittest.TestCase):
         self.assertIn("never pad with an invented line", text("skills/threads-post-writer/SKILL.md"))
         self.assertIn("350 à 500", text("references/voice-profile.md"))
 
+    def test_the_card_is_shown_as_returned(self):
+        for name in ("skills/threads-post-writer/SKILL.md", "skills/threads-repurposer/SKILL.md"):
+            body = text(name)
+            self.assertIn("exactly as", body, name)
+            self.assertIn("fingerprint must be visible", body, name)
+
+    def test_a_change_of_meaning_is_not_a_rewording(self):
+        rules = text("references/voice-rules.md")
+        self.assertIn("A rewording that changes what a fact means is", rules)
+        self.assertIn("A sentence you cannot list is a sentence you delete", rules)
+        self.assertIn("or delete it", text("SKILL.md"))
+
+    def test_an_existing_profile_is_not_offered_for_saving_again(self):
+        self.assertIn("If a profile with `filled: yes` already exists, do not ask", text("skills/threads-post-writer/SKILL.md"))
+
     def test_skill_descriptions_have_no_dashes(self):
         for path in [ROOT / "SKILL.md", *sorted((ROOT / "skills").glob("*/SKILL.md"))]:
             for line in path.read_text(encoding="utf-8").splitlines():

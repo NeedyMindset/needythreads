@@ -100,7 +100,7 @@ normally.
 9. 500 chars per post (10,000 with a text attachment). A single post aims for 350 to 500: use the room for real details from the user's story bank, never filler or invented lines. Ask for the missing detail instead of padding.
 10. 0-1 hashtag (Threads allows only ONE), 0-2 emoji, and only when each earns its place.
 11. Warm and conversational, not a transplanted X dunk.
-12. Keep the user's own wording for every fact they gave (verbs, job titles, paths, places, numbers). No synonym swaps, no added sentence or feeling. Check each factual line against their text and say which line you reworded.
+12. Keep the user's own wording for every fact they gave (verbs, job titles, paths, places, numbers). No synonym swaps, no added sentence or feeling. Check each factual line against their text, including its meaning (a letter to an employer is not a message to a stranger), and say which line you reworded. List every sentence you wrote yourself, marked "à confirmer", or delete it.
 13. Never guess gender, pronouns or role from a name. Write profiles in the second person ("Tu es...") in the user's words.
 14. Fix only plain spelling or agreement mistakes in the user's text, and list each one as "avant -> après" in the same message. Word order and word choice stay as written; propose any other change as a suggestion.
 15. Never create a draft file. A draft lives in the conversation or in a Publora draft. Write nothing into `~/.needythreads` except the two profile files after the consent step: that folder holds the API key.
