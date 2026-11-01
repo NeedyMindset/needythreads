@@ -142,6 +142,21 @@ class PublicationTests(unittest.TestCase):
         self.assertIn("never skip a group silently", body)
         self.assertIn("Gap check before saving", text("skills/threads-humanizer/sub-skills/voice-profile.md"))
 
+    def test_profile_answers_land_in_their_own_field(self):
+        body = text("skills/threads-post-writer/SKILL.md")
+        self.assertIn("Each answer goes in the field that already holds it, never in a new section", body)
+        self.assertIn("story-bank.md` §8", body)
+        self.assertIn("story-bank.md` §9", body)
+        self.assertIn("every line marked `[à confirmer]`", body)
+        self.assertIn("check both files", body)
+        sub = text("skills/threads-humanizer/sub-skills/voice-profile.md")
+        self.assertIn("every line marked `[à confirmer]`", sub)
+        self.assertIn("story-bank.md` §8 and §9", sub)
+
+    def test_the_card_keeps_its_code_block(self):
+        for path in ("skills/threads-post-writer/SKILL.md", "skills/threads-repurposer/SKILL.md"):
+            self.assertIn("fenced text block", text(path), path)
+
     def test_skill_descriptions_have_no_dashes(self):
         for path in [ROOT / "SKILL.md", *sorted((ROOT / "skills").glob("*/SKILL.md"))]:
             for line in path.read_text(encoding="utf-8").splitlines():

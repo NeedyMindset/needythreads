@@ -31,7 +31,7 @@ never required.
 5. Write `~/.needythreads/voice-profile.md` (create the folder if needed, start from the template structure): fill sections 1-5 (write section 2 in the second person, "Tu es...", in the user's words, and never infer gender or pronouns from a name), copy the 2-4
    strongest lines verbatim into "Signature examples", and set the Status block to
    `filled: yes`, `source: <pasted|read-layer|manual>`, `updated: <today>`.
-6. Gap check before saving: every field left empty or reading `(à compléter)` is a question you still owe the user (words never used, names to cite or avoid, off-limits topics, main link, brand assets). Ask them in one grouped message; « passer » writes `(passé volontairement)` and closes the field for good. Never leave a field blank without saying so.
+6. Gap check before saving: every field left empty or reading `(à compléter)`, and every line marked `[à confirmer]`, is a question you still owe the user (words never used, names to cite or avoid, off-limits topics, main link, brand assets, and each inference quoted as it stands). Ask them in one grouped message; « passer » writes `(passé volontairement)` in an empty field and closes it for good, and leaves an `[à confirmer]` line unchanged. Put each answer in the field that already holds it, never in a new section: names and off-limits topics live in `~/.needythreads/story-bank.md` §8 and §9. Never leave a field blank without saying so.
 7. If you cannot write files (claude.ai chat), give the profile as one copy-paste block and tell the user to paste it into the instructions of their Claude project.
 8. Show the filled profile for approval before saving; tell the user every writing
    skill will now match it automatically.

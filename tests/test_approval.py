@@ -58,6 +58,18 @@ class DigestTests(unittest.TestCase):
             self.assertIn(word, card)
         self.assertIn("ne créent rien", card)
 
+    def test_card_shows_the_text_and_the_key_path_as_written(self):
+        draft = "Les signaux :\n- un\n- deux"
+        card = render_approval_card(kind="post", preview_text=draft, key_source=r"C:\Users\x\.needythreads\.env")
+        self.assertIn("```text\n" + draft + "\n```", card)
+        self.assertIn(r"`C:\Users\x\.needythreads\.env`", card)
+        self.assertNotIn("> - un", card)
+
+    def test_card_fence_is_longer_than_any_fence_in_the_text(self):
+        draft = "Avant\n```\nApres"
+        card = render_approval_card(kind="post", preview_text=draft)
+        self.assertIn("````text\n" + draft + "\n````", card)
+
     def test_card_says_when_the_account_is_not_verified(self):
         card = render_approval_card(kind="post", preview_text=TEXT)
         self.assertIn("non vérifié", card)

@@ -132,7 +132,7 @@ otherwise.
   A skill that sends a post must pass the fingerprint; `tests/test_skill_rules.py`
   fails if it does not. Saving a profile needs a shown preview and a clear yes.
   Skills never create draft files and write only the two profile files into
-  `~/.needythreads` (the key folder); text corrections are limited to listed mistakes. Fields still empty or `(à compléter)` are asked in one grouped message; « passer » writes `(passé volontairement)`.
+  `~/.needythreads` (the key folder); text corrections are limited to listed mistakes. Fields still empty or `(à compléter)`, and every `[à confirmer]` line, are asked in one grouped message; « passer » writes `(passé volontairement)` in an empty field. Each answer goes to its existing field (names and off-limits topics: `story-bank.md` §8-9), never to a new section. The approval card puts the draft in a fenced text block and the key path in a code span, so a Markdown chat shows both as written.
 - **Threads has no comment/reply/reaction endpoint on Publora** (those are
   LinkedIn only), and `create-post` cannot target another user's post. So
   `kind="reply"` always routes to a manual copy-paste block in

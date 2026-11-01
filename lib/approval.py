@@ -72,6 +72,10 @@ def render_approval_card(
     `account` comes from `lib.target_account()`; `key_source` from
     `lib._env.env_source("PUBLORA_API_KEY")`; `warnings` from
     `lib._env.ignored_credentials()` formatted by the caller.
+
+    The draft sits in a fenced text block and the key path in a code span, so a
+    chat that renders Markdown shows both as written: a `- ` line stays a dash,
+    a Windows path keeps its backslashes.
     """
     en = lang == "en"
     if char_count is None:
@@ -83,7 +87,7 @@ def render_approval_card(
     lines.append(("**Account:** " if en else "**Compte cible :** ")
                  + (account or ("not verified" if en else "non vérifié")))
     if key_source:
-        lines.append(("**Key read from:** " if en else "**Clé lue dans :** ") + key_source)
+        lines.append(("**Key read from:** " if en else "**Clé lue dans :** ") + f"`{key_source}`")
     lines.append(("**Text fingerprint:** " if en else "**Empreinte du texte :** ")
                  + f"`{text_digest(preview_text)}`")
     lines.append(("**Characters:** " if en else "**Caractères :** ") + str(char_count))
@@ -92,8 +96,12 @@ def render_approval_card(
     lines.append("")
     lines.append("**Preview:**" if en else "**Aperçu :**")
     lines.append("")
-    for pl in preview_text.splitlines() or [""]:
-        lines.append(f"> {pl}")
+    fence = "```"
+    while fence in preview_text:
+        fence += "`"
+    lines.append(fence + "text")
+    lines.extend(preview_text.splitlines() or [""])
+    lines.append(fence)
     lines.append("")
     lines.append(format_report(check_draft(preview_text, kind)))
     lines.append("")
